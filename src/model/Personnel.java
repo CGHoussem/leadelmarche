@@ -24,15 +24,21 @@ public class Personnel {
 
     private int id;
     private String nom;
+    private String prenom;
     private String adressePerso;
     private String adresseTravail;
     private String poste;
     private Personnel superieur;
     private int numBadge;
 
-    public Personnel(int id, String nom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge) {
+    public Personnel(){
+        
+    }
+    
+    public Personnel(int id, String nom, String prenom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge) {
         this.id = id;
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
+        this.prenom = prenom;
         this.adressePerso = adressePerso;
         this.adresseTravail = adresseTravail;
         this.poste = poste;
@@ -40,8 +46,9 @@ public class Personnel {
         this.numBadge = numBadge;
     }
 
-    public Personnel(String nom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge) {
-        this.nom = nom;
+    public Personnel(String nom, String prenom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge) {
+        this.nom = nom.toUpperCase();
+        this.prenom = prenom;
         this.adressePerso = adressePerso;
         this.adresseTravail = adresseTravail;
         this.poste = poste;
@@ -62,7 +69,15 @@ public class Personnel {
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
+    }
+    
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     public String getAdressePerso() {
@@ -103,6 +118,11 @@ public class Personnel {
 
     public void setNumBadge(int numBadge) {
         this.numBadge = numBadge;
+    }
+    
+    @Override
+    public String toString(){
+        return nom + " " + prenom;
     }
 
 }

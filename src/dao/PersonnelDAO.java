@@ -20,8 +20,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Personnel;
 
 /**
@@ -36,12 +38,13 @@ public class PersonnelDAO implements DAO<Personnel> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel WHERE id = ?");
-            pstmt.setInt(0, id);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 p = new Personnel(
                         rs.getInt("id"),
                         rs.getString("nom"),
+                        rs.getString("prenom"),
                         rs.getString("adressePerso"),
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
@@ -62,12 +65,13 @@ public class PersonnelDAO implements DAO<Personnel> {
         List<Personnel> personnels = new ArrayList<>();
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel");
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel WHERE active=true");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 personnels.add(new Personnel(
                         rs.getInt("id"),
                         rs.getString("nom"),
+                        rs.getString("prenom"),
                         rs.getString("adressePerso"),
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
@@ -87,15 +91,23 @@ public class PersonnelDAO implements DAO<Personnel> {
     public void add(Personnel t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Personnel VALUES(NULL, ?, ?, ?, ?, ?, ?)");
-            pstmt.setString(0, t.getNom());
-            pstmt.setString(1, t.getAdressePerso());
-            pstmt.setString(2, t.getAdresseTravail());
-            pstmt.setString(3, t.getPoste());
-            pstmt.setInt(4, t.getSuperieur().getId());
-            pstmt.setInt(5, t.getNumBadge());
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Personnel VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, true)");
+            pstmt.setString(1, t.getNom());
+            pstmt.setString(2, t.getPrenom());
+            pstmt.setString(3, t.getAdressePerso());
+            pstmt.setString(4, t.getAdresseTravail());
+            pstmt.setString(5, t.getPoste());
+            if (t.getSuperieur() == null) {
+                pstmt.setNull(6, Types.INTEGER);
+            } else {
+                pstmt.setInt(6, t.getSuperieur().getId());
+            }
+            pstmt.setInt(7, t.getNumBadge());
             pstmt.execute();
             pstmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Le personnel " + t.getNom() + " a été ajouté avec succés", "Ajout d'un personnel", JOptionPane.INFORMATION_MESSAGE);
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -105,14 +117,15 @@ public class PersonnelDAO implements DAO<Personnel> {
     public void update(Personnel t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("UPDATE Personnel SET nom=?, adressePerso=?, adresseTravail=?, poste=?, superieur=?, numBadge=? WHERE id=?");
-            pstmt.setString(0, t.getNom());
-            pstmt.setString(1, t.getAdressePerso());
-            pstmt.setString(2, t.getAdresseTravail());
-            pstmt.setString(3, t.getPoste());
-            pstmt.setInt(4, t.getSuperieur().getId());
-            pstmt.setInt(5, t.getNumBadge());
-            pstmt.setInt(6, t.getId());
+            PreparedStatement pstmt = con.prepareStatement("UPDATE Personnel SET nom=?, prenom=?, adressePerso=?, adresseTravail=?, poste=?, superieur=?, numBadge=? WHERE id=?");
+            pstmt.setString(1, t.getNom());
+            pstmt.setString(2, t.getPrenom());
+            pstmt.setString(3, t.getAdressePerso());
+            pstmt.setString(4, t.getAdresseTravail());
+            pstmt.setString(5, t.getPoste());
+            pstmt.setInt(6, t.getSuperieur().getId());
+            pstmt.setInt(7, t.getNumBadge());
+            pstmt.setInt(8, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -124,9 +137,9 @@ public class PersonnelDAO implements DAO<Personnel> {
     public void delete(Personnel t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("DELETE FROM Personnel WHERE id=?");
-            pstmt.setInt(0, t.getId());
-            pstmt.execute();
+            PreparedStatement pstmt = con.prepareStatement("UPDATE Personnel SET active=false WHERE id=?");
+            pstmt.setInt(1, t.getId());
+            pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

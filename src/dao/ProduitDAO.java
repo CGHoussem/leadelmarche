@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Produit;
 import model.TypeProduit;
 
@@ -37,18 +38,18 @@ public class ProduitDAO implements DAO<Produit> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Produit WHERE id = ?");
-            pstmt.setInt(0, id);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 TypeProduit type = TypeProduit.ALIMENT;
-                switch (rs.getInt("type")) {
-                    case 1:
+                switch (rs.getString("type")) {
+                    case "MEDECINE":
                         type = TypeProduit.MEDECINE;
                         break;
-                    case 2:
+                    case "APPAREIL_ELECTRONIQUE":
                         type = TypeProduit.APPAREIL_ELECTRONIQUE;
                         break;
-                    case 3:
+                    case "AUTRE":
                         type = TypeProduit.AUTRE;
                         break;
                 }
@@ -77,18 +78,18 @@ public class ProduitDAO implements DAO<Produit> {
         List<Produit> prodtuis = new ArrayList<>();
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Produit");
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Produit WHERE active=true");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 TypeProduit type = TypeProduit.ALIMENT;
-                switch (rs.getInt("type")) {
-                    case 1:
+                switch (rs.getString("type")) {
+                    case "MEDECINE":
                         type = TypeProduit.MEDECINE;
                         break;
-                    case 2:
+                    case "APPAREIL_ELECTRONIQUE":
                         type = TypeProduit.APPAREIL_ELECTRONIQUE;
                         break;
-                    case 3:
+                    case "AUTRE":
                         type = TypeProduit.AUTRE;
                         break;
                 }
@@ -116,29 +117,19 @@ public class ProduitDAO implements DAO<Produit> {
     public void add(Produit t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Produit VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
-            int type = 0;
-            switch (t.getType()) {
-                case MEDECINE:
-                    type = 1;
-                    break;
-                case APPAREIL_ELECTRONIQUE:
-                    type = 2;
-                    break;
-                case AUTRE:
-                    type = 3;
-                    break;
-            }
-            pstmt.setString(0, t.getNom());
-            pstmt.setString(1, t.getDescription());
-            pstmt.setInt(2, type);
-            pstmt.setFloat(3, t.getPrix());
-            pstmt.setString(4, t.getPays());
-            pstmt.setFloat(5, t.getTva());
-            pstmt.setInt(6, t.getQteStock());
-            pstmt.setString(7, t.getNomFournisseur());
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Produit VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, true)");
+            pstmt.setString(1, t.getNom());
+            pstmt.setString(2, t.getDescription());
+            pstmt.setString(3, t.getType().name());
+            pstmt.setFloat(4, t.getPrix());
+            pstmt.setString(5, t.getPays());
+            pstmt.setFloat(6, t.getTva());
+            pstmt.setInt(7, t.getQteStock());
+            pstmt.setString(8, t.getNomFournisseur());
             pstmt.execute();
             pstmt.close();
+
+            JOptionPane.showMessageDialog(null, "Le produit " + t.getNom() + " a été ajouté avec succés", "Ajout d'un produit", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -149,27 +140,15 @@ public class ProduitDAO implements DAO<Produit> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("UPDATE Produit SET nom=?, description=?, type=?, prix=?, pays=?, tva=?, qteStock=?, nomFournisseur=? WHERE id=?");
-            int type = 0;
-            switch (t.getType()) {
-                case MEDECINE:
-                    type = 1;
-                    break;
-                case APPAREIL_ELECTRONIQUE:
-                    type = 2;
-                    break;
-                case AUTRE:
-                    type = 3;
-                    break;
-            }
-            pstmt.setString(0, t.getNom());
-            pstmt.setString(1, t.getDescription());
-            pstmt.setInt(2, type);
-            pstmt.setFloat(3, t.getPrix());
-            pstmt.setString(4, t.getPays());
-            pstmt.setFloat(5, t.getTva());
-            pstmt.setInt(6, t.getQteStock());
-            pstmt.setString(7, t.getNomFournisseur());
-            pstmt.setInt(8, t.getId());
+            pstmt.setString(1, t.getNom());
+            pstmt.setString(2, t.getDescription());
+            pstmt.setString(3, t.getType().name());
+            pstmt.setFloat(4, t.getPrix());
+            pstmt.setString(5, t.getPays());
+            pstmt.setFloat(6, t.getTva());
+            pstmt.setInt(7, t.getQteStock());
+            pstmt.setString(8, t.getNomFournisseur());
+            pstmt.setInt(9, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -181,9 +160,9 @@ public class ProduitDAO implements DAO<Produit> {
     public void delete(Produit t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("DELETE FROM Produit WHERE id=?");
-            pstmt.setInt(0, t.getId());
-            pstmt.execute();
+            PreparedStatement pstmt = con.prepareStatement("UPDATE Produit SET active=false WHERE id=?");
+            pstmt.setInt(1, t.getId());
+            pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

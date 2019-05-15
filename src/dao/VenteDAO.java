@@ -36,7 +36,7 @@ public class VenteDAO implements DAO<Vente> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("SELECT * FROM lignevente WHERE produit=?");
-            pstmt.setInt(0, idVente);
+            pstmt.setInt(1, idVente);
             ResultSet rs = pstmt.executeQuery();
             ProduitDAO pdao = new ProduitDAO();
             while (rs.next()) {
@@ -52,8 +52,8 @@ public class VenteDAO implements DAO<Vente> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO lignevente VALUES(NULL, ?, ?)");
-            pstmt.setInt(0, idVente);
-            pstmt.setInt(1, idProduit);
+            pstmt.setInt(1, idVente);
+            pstmt.setInt(2, idProduit);
             pstmt.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -66,7 +66,7 @@ public class VenteDAO implements DAO<Vente> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Vente WHERE id = ?");
-            pstmt.setInt(0, id);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 ClientDAO cdao = new ClientDAO();
@@ -124,12 +124,12 @@ public class VenteDAO implements DAO<Vente> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO Vente VALUES(NULL, ?, ?, ?, ?, ?, ?)");
-            pstmt.setString(0, t.getNom());
-            pstmt.setInt(1, t.getCaissier().getId());
-            pstmt.setInt(2, t.getClient().getId());
-            pstmt.setFloat(3, t.getSousTotal());
-            pstmt.setFloat(4, t.getTva());
-            pstmt.setFloat(5, t.getTotal());
+            pstmt.setString(1, t.getNom());
+            pstmt.setInt(2, t.getCaissier().getId());
+            pstmt.setInt(3, t.getClient().getId());
+            pstmt.setFloat(4, t.getSousTotal());
+            pstmt.setFloat(5, t.getTva());
+            pstmt.setFloat(6, t.getTotal());
             pstmt.execute();
             pstmt.close();
 
@@ -147,13 +147,13 @@ public class VenteDAO implements DAO<Vente> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("UPDATE Vente SET nom=?, caissier=?, client=?, sous_total=?, tva=?, total=? WHERE id=?");
-            pstmt.setString(0, t.getNom());
-            pstmt.setInt(1, t.getCaissier().getId());
-            pstmt.setInt(2, t.getClient().getId());
-            pstmt.setFloat(3, t.getSousTotal());
-            pstmt.setFloat(4, t.getTva());
-            pstmt.setFloat(5, t.getTotal());
-            pstmt.setInt(6, t.getId());
+            pstmt.setString(1, t.getNom());
+            pstmt.setInt(2, t.getCaissier().getId());
+            pstmt.setInt(3, t.getClient().getId());
+            pstmt.setFloat(4, t.getSousTotal());
+            pstmt.setFloat(5, t.getTva());
+            pstmt.setFloat(6, t.getTotal());
+            pstmt.setInt(7, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -166,7 +166,7 @@ public class VenteDAO implements DAO<Vente> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("DELETE FROM Vente WHERE id=?");
-            pstmt.setInt(0, t.getId());
+            pstmt.setInt(1, t.getId());
             pstmt.execute();
             pstmt.close();
         } catch (SQLException e) {

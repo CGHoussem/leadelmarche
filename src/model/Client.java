@@ -34,7 +34,7 @@ public class Client {
 
     public Client(int id, String nom, String prenom, int numCarteFidelite, String mail, int codePostal) {
         this.id = id;
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
         this.prenom = prenom;
         this.numCarteFidelite = numCarteFidelite;
         this.mail = mail;
@@ -42,7 +42,7 @@ public class Client {
     }
 
     public Client(String nom, String prenom, int numCarteFidelite, String mail, int codePostal) {
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
         this.prenom = prenom;
         this.numCarteFidelite = numCarteFidelite;
         this.mail = mail;
@@ -62,7 +62,7 @@ public class Client {
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
     }
 
     public String getPrenom() {

@@ -36,7 +36,7 @@ public class ClientDAO implements DAO<Client> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Client WHERE id = ?");
-            pstmt.setInt(0, id);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 c = new Client(
@@ -61,7 +61,7 @@ public class ClientDAO implements DAO<Client> {
         List<Client> clients = new ArrayList<>();
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Client");
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Client WHERE active=true");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 clients.add(new Client(
@@ -85,12 +85,12 @@ public class ClientDAO implements DAO<Client> {
     public void add(Client t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Client VALUES(NULL, ?, ?, ?, ?, ?)");
-            pstmt.setString(0, t.getNom());
-            pstmt.setString(1, t.getPrenom());
-            pstmt.setInt(2, t.getNumCardeFidelite());
-            pstmt.setString(3, t.getMail());
-            pstmt.setInt(4, t.getCodePostal());
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Client VALUES(NULL, ?, ?, ?, ?, ?, true)");
+            pstmt.setString(1, t.getNom());
+            pstmt.setString(2, t.getPrenom());
+            pstmt.setInt(3, t.getNumCardeFidelite());
+            pstmt.setString(4, t.getMail());
+            pstmt.setInt(5, t.getCodePostal());
             pstmt.execute();
             pstmt.close();
         } catch (SQLException e) {
@@ -103,12 +103,12 @@ public class ClientDAO implements DAO<Client> {
         try {
             Connection con = Connexion.getInstance();
             PreparedStatement pstmt = con.prepareStatement("UPDATE Client SET nom=?, prenom=?, numCarteFidelite=?, mail=?, codePostal=? WHERE id=?");
-            pstmt.setString(0, t.getNom());
-            pstmt.setString(1, t.getPrenom());
-            pstmt.setInt(2, t.getNumCardeFidelite());
-            pstmt.setString(3, t.getMail());
-            pstmt.setInt(4, t.getCodePostal());
-            pstmt.setInt(5, t.getId());
+            pstmt.setString(1, t.getNom());
+            pstmt.setString(2, t.getPrenom());
+            pstmt.setInt(3, t.getNumCardeFidelite());
+            pstmt.setString(4, t.getMail());
+            pstmt.setInt(5, t.getCodePostal());
+            pstmt.setInt(6, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -120,9 +120,9 @@ public class ClientDAO implements DAO<Client> {
     public void delete(Client t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("DELETE FROM Client WHERE id=?");
-            pstmt.setInt(0, t.getId());
-            pstmt.execute();
+            PreparedStatement pstmt = con.prepareStatement("UPDATE Client SET active=false WHERE id=?");
+            pstmt.setInt(1, t.getId());
+            pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

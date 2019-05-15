@@ -1,4 +1,5 @@
 
+import dao.Connexion;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/FXMLDocument.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -21,9 +22,14 @@ public class Main extends Application {
         stage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+    @Override
+    public void stop() throws Exception {
+        Connexion.closeConnection();
+        super.stop();
+    }
+
+    
+    
     public static void main(String[] args) {
         launch(args);
     }

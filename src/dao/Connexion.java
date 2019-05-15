@@ -51,5 +51,6 @@ public class Connexion {
                 System.out.println(ex.getMessage());
             }
         }
+        System.out.println("Connection is out!");
     }
 }

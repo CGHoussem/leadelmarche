@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -8,55 +10,40 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLDocumentController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
+            <MenuItem mnemonicParsing="false" onAction="#quitApplication" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" text="About Leadel Magasin" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
           <children>
@@ -68,27 +55,207 @@
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
               </textFill>
             </Label>
+                  <VBox alignment="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="335.0" prefWidth="202.0" spacing="20.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherInventaire" prefHeight="50.0" prefWidth="175.0" text="Inventaire">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherPtsVente" prefHeight="50.0" prefWidth="175.0" text="Points de vente">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherPersonnels" prefHeight="50.0" prefWidth="175.0" text="Management du personnel">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherClients" prefHeight="50.0" prefWidth="175.0" text="Management des clients">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+            <AnchorPane id="Content" maxWidth="-Infinity" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="664.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                        <Pane layoutX="11.0" layoutY="41.0" maxWidth="647.0" prefHeight="499.0" prefWidth="647.0">
+                           <children>
+                              <TabPane fx:id="inventaire" prefHeight="499.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE" visible="false">
+                                <tabs>
+                                  <Tab closable="false" text="Afficher les Produits">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TableView fx:id="tableProduits" prefHeight="467.0" prefWidth="646.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="NomProduit" editable="false" prefWidth="87.0" resizable="false" text="Nom" />
+                                                    <TableColumn fx:id="DescriptionProduit" editable="false" prefWidth="165.0" sortable="false" text="Description" />
+                                                      <TableColumn fx:id="TypeProduitTable" editable="false" prefWidth="133.0" sortable="false" text="Type" />
+                                                      <TableColumn fx:id="PrixProduit" editable="false" prefWidth="83.0" text="Prix" />
+                                                      <TableColumn fx:id="PaysProduit" editable="false" prefWidth="116.0" sortable="false" text="Pays" />
+                                                      <TableColumn fx:id="QteStockProduit" editable="false" prefWidth="61.0" resizable="false" text="Qte Stock" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab closable="false" text="Ajouter un Produit">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" layoutX="6.0" prefHeight="295.0" prefWidth="638.0" spacing="10.0">
+                                                   <children>
+                                                      <GridPane>
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="145.0" />
+                                                          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="245.0" minWidth="0.0" prefWidth="245.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <Label text="Nom du produit" />
+                                                            <TextField fx:id="nomProduit" promptText="Nom du produit" GridPane.columnIndex="1" />
+                                                            <Label text="Description" GridPane.rowIndex="1" />
+                                                            <Label text="Type de produit" GridPane.rowIndex="2" />
+                                                            <TextField fx:id="description" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <ChoiceBox fx:id="typeProduit" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <Label text="Prix" GridPane.rowIndex="3" />
+                                                            <Label text="Pays d'origine" GridPane.rowIndex="4" />
+                                                            <Label text="Pourcentage TVA" GridPane.rowIndex="5" />
+                                                            <Label text="Quantité en stock" GridPane.rowIndex="6" />
+                                                            <Label text="Nom du fournisseur" GridPane.rowIndex="7" />
+                                                            <TextField fx:id="prix" promptText="Prix" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                            <TextField fx:id="pays" promptText="Pays d'origine" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                            <TextField fx:id="tva" promptText="\% TVA" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                            <TextField fx:id="qte" promptText="Qte Stock" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                            <TextField fx:id="nomFournisseur" promptText="Nom du fournisseur" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <HBox alignment="CENTER" spacing="50.0">
+                                                         <children>
+                                                            <Button cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetForm" prefHeight="35.0" prefWidth="100.0" text="Rénitialiser" />
+                                                            <Button defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="35.0" prefWidth="100.0" text="Ajouter" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                              <TabPane fx:id="gPersonnels" layoutX="1.0" layoutY="4.0" prefHeight="499.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE">
+                                 <tabs>
+                                    <Tab closable="false" text="Afficher les Personnels">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TableView fx:id="tablePersonnels" prefHeight="468.0" prefWidth="646.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="NumBadgeCol" editable="false" prefWidth="101.0" text="# badge" />
+                                                      <TableColumn fx:id="NomPersoCol" editable="false" minWidth="0.0" prefWidth="79.0" text="Nom" />
+                                                      <TableColumn fx:id="PrenomPersoCol" editable="false" prefWidth="90.0" text="Prénom" />
+                                                      <TableColumn fx:id="AdrPersoCol" editable="false" prefWidth="150.0" sortable="false" text="\@ personnelle" />
+                                                      <TableColumn fx:id="AdrTravailCol" editable="false" prefWidth="150.0" sortable="false" text="\@ lieu de travail" />
+                                                      <TableColumn fx:id="PostePersoCol" editable="false" prefWidth="90.0" sortable="false" text="Poste" />
+                                                      <TableColumn fx:id="SupPersoCol" editable="false" minWidth="0.0" prefWidth="105.0" text="Supérieur" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab closable="false" text="Ajouter un Personnel">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" layoutX="6.0" prefHeight="295.0" prefWidth="638.0" spacing="10.0">
+                                                   <children>
+                                                      <GridPane>
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="215.0" />
+                                                            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="253.0" minWidth="0.0" prefWidth="164.0" />
+                                                            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="250.0" minWidth="0.0" prefWidth="250.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <TextField fx:id="numBadgeTF" editable="false" prefWidth="150.0" promptText="# Badge" GridPane.columnIndex="1" />
+                                                            <Button mnemonicParsing="false" onAction="#generateNumBadge" text="Génerer # Badge" GridPane.columnIndex="2" />
+                                                            <TextField fx:id="nomTF" prefWidth="150.0" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <TextField fx:id="prenomTF" prefWidth="150.0" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <TextField fx:id="adrPersoTF" prefWidth="150.0" promptText="\@ personnelle" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                            <TextField fx:id="adrTravailTF" prefWidth="150.0" promptText="\@ de lieu de travail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                            <TextField fx:id="posteTF" prefWidth="150.0" promptText="Poste / Fonction" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                            <ChoiceBox fx:id="superieurCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                            <Label text="Num Badge" />
+                                                            <Label text="Nom" GridPane.rowIndex="1" />
+                                                            <Label text="Prénom" GridPane.rowIndex="2" />
+                                                            <Label text="Adresse personnelle" GridPane.rowIndex="3" />
+                                                            <Label text="Adresse de lieu de travail" GridPane.rowIndex="4" />
+                                                            <Label text="Poste / Fonction" GridPane.rowIndex="5" />
+                                                            <Label text="Supérieur immédiat" GridPane.rowIndex="6" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <HBox alignment="CENTER" spacing="50.0">
+                                                         <children>
+                                                            <Button cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetPersoForm" prefHeight="35.0" prefWidth="100.0" text="Rénitialiser" />
+                                                            <Button defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ajouterPersonnel" prefHeight="35.0" prefWidth="100.0" text="Ajouter" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                 </tabs>
+                              </TabPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Pane>
               </children>
             </AnchorPane>
           </content>
         </ScrollPane>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-          </children>
-        </AnchorPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
       <children>
-        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="ISTY - Copyright © 2018-2019" HBox.hgrow="ALWAYS">
           <font>
             <Font size="11.0" fx:id="x3" />
           </font>
@@ -97,11 +264,14 @@
           </textFill>
         </Label>
         <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
-        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+        <Label font="$x3" maxWidth="-1.0" text="BEN MABROUK Houssem" textFill="$x4" HBox.hgrow="NEVER" />
       </children>
       <padding>
-        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+        <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
       </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
     </HBox>
   </children>
 </VBox>
