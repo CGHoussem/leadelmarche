@@ -19,6 +19,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,7 +38,11 @@ public class Connexion {
             try {
                 instance = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(null, "Erreur de connexion à la base de donnée!", "Erreur", JOptionPane.ERROR_MESSAGE);
+
                 System.out.println(ex.getMessage());
+                System.exit(1);
             }
         }
         return instance;

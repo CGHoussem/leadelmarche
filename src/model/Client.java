@@ -73,11 +73,11 @@ public class Client {
         this.prenom = prenom;
     }
 
-    public int getNumCardeFidelite() {
+    public int getNumCarteFidelite() {
         return numCarteFidelite;
     }
 
-    public void setNumCardeFidelite(int numCarteFidelite) {
+    public void setNumCarteFidelite(int numCarteFidelite) {
         this.numCarteFidelite = numCarteFidelite;
     }
 

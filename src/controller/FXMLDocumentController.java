@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ClientDAO;
 import dao.Connexion;
 import dao.PersonnelDAO;
 import dao.ProduitDAO;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
+import model.Client;
 import model.Personnel;
 import model.Produit;
 import model.TypeProduit;
@@ -35,6 +37,8 @@ public class FXMLDocumentController implements Initializable {
     private TabPane inventaire;
     @FXML
     private TabPane gPersonnels;
+    @FXML
+    private TabPane gClients;
     // Produits TextFields
     @FXML
     private TextField nomProduit;
@@ -67,6 +71,17 @@ public class FXMLDocumentController implements Initializable {
     private TextField posteTF;
     @FXML
     private ChoiceBox superieurCB;
+    // Clients TextFields
+    @FXML
+    private TextField nomClientTF;
+    @FXML
+    private TextField prenomClientTF;
+    @FXML
+    private TextField numCarteFideliteTF;
+    @FXML
+    private TextField mailClientTF;
+    @FXML
+    private TextField codePostaleClientTF;
     // Table Produits
     @FXML
     private TableView<Produit> tableProduits;
@@ -99,6 +114,19 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Personnel, String> PostePersoCol;
     @FXML
     private TableColumn<Personnel, Personnel> SupPersoCol;
+    // Table Clients
+    @FXML
+    private TableView<Client> tableClients;
+    @FXML
+    private TableColumn<Client, String> NomClientCol;
+    @FXML
+    private TableColumn<Client, String> PrenomClientCol;
+    @FXML
+    private TableColumn<Client, Integer> NumCarteClientCol;
+    @FXML
+    private TableColumn<Client, String> MailClientCol;
+    @FXML
+    private TableColumn<Client, Integer> CodePostaleClientCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,12 +134,15 @@ public class FXMLDocumentController implements Initializable {
         fillStaffChoiceBox();
         initializeProductTableColumns();
         initializeStaffTableColumns();
+        initializeClientTableColumns();
 
         fillProductTable();
         fillStaffTable();
+        fillClientTable();
 
         inventaire.setVisible(true);
         gPersonnels.setVisible(false);
+        gClients.setVisible(false);
     }
 
     private void initializeProductTableColumns() {
@@ -133,12 +164,24 @@ public class FXMLDocumentController implements Initializable {
         SupPersoCol.setCellValueFactory(new PropertyValueFactory<Personnel, Personnel>("superieur"));
     }
 
+    private void initializeClientTableColumns() {
+        NomClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
+        PrenomClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
+        NumCarteClientCol.setCellValueFactory(new PropertyValueFactory<Client, Integer>("numCarteFidelite"));
+        MailClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("mail"));
+        CodePostaleClientCol.setCellValueFactory(new PropertyValueFactory<Client, Integer>("codePostal"));
+    }
+
     private void fillStaffTable() {
         tablePersonnels.getItems().setAll(new PersonnelDAO().getAll());
     }
 
     private void fillProductTable() {
         tableProduits.getItems().setAll(new ProduitDAO().getAll());
+    }
+
+    private void fillClientTable() {
+        tableClients.getItems().setAll(new ClientDAO().getAll());
     }
 
     private void fillProductChoiceBox() {
@@ -160,22 +203,27 @@ public class FXMLDocumentController implements Initializable {
     private void afficherInventaire(ActionEvent event) {
         inventaire.setVisible(true);
         gPersonnels.setVisible(false);
+        gClients.setVisible(false);
     }
 
     @FXML
     private void afficherPtsVente(ActionEvent event) {
         inventaire.setVisible(false);
         gPersonnels.setVisible(false);
+        gClients.setVisible(false);
     }
 
     @FXML
     private void afficherPersonnels(ActionEvent event) {
-        inventaire.setVisible(false);
         gPersonnels.setVisible(true);
+        inventaire.setVisible(false);
+        gClients.setVisible(false);
     }
 
     @FXML
     private void afficherClients(ActionEvent event) {
+        gClients.setVisible(true);
+        generateNumCarteFidelite();
         inventaire.setVisible(false);
         gPersonnels.setVisible(false);
     }
@@ -252,7 +300,7 @@ public class FXMLDocumentController implements Initializable {
                     numBadge
             );
             new PersonnelDAO().add(p);
-            
+
             resetPersoForm(null);
             fillStaffChoiceBox();
             fillStaffTable();
@@ -262,9 +310,40 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    private void ajouterClient(ActionEvent event) {
+        if (!nomClientTF.getText().isEmpty()
+                && !prenomClientTF.getText().isEmpty()
+                && !numCarteFideliteTF.getText().isEmpty()
+                && !mailClientTF.getText().isEmpty()
+                && !codePostaleClientTF.getText().isEmpty()) {
+            int numCarteFidelite = Integer.parseInt(numCarteFideliteTF.getText());
+            int codePostal = Integer.parseInt(codePostaleClientTF.getText());
+
+            Client c = new Client(
+                    nomClientTF.getText(),
+                    prenomClientTF.getText(),
+                    numCarteFidelite,
+                    mailClientTF.getText(),
+                    codePostal
+            );
+            new ClientDAO().add(c);
+
+            resetClientForm(null);
+            fillClientTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Vérifier vos données!", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @FXML
     private void generateNumBadge(ActionEvent event) {
         Random r = new Random();
         numBadgeTF.setText(String.valueOf(r.nextInt() & Integer.MAX_VALUE));
+    }
+
+    private void generateNumCarteFidelite() {
+        int num = new Random().nextInt() & Integer.MAX_VALUE;
+        numCarteFideliteTF.setText(String.valueOf(num));
     }
 
     @FXML
@@ -286,6 +365,15 @@ public class FXMLDocumentController implements Initializable {
         adrPersoTF.clear();
         adrTravailTF.clear();
         posteTF.clear();
+    }
+
+    @FXML
+    private void resetClientForm(ActionEvent event) {
+        nomClientTF.clear();
+        prenomClientTF.clear();
+        generateNumCarteFidelite();
+        mailClientTF.clear();
+        codePostaleClientTF.clear();
     }
 
     @FXML

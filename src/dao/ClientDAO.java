@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Client;
 
 /**
@@ -88,11 +89,13 @@ public class ClientDAO implements DAO<Client> {
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO Client VALUES(NULL, ?, ?, ?, ?, ?, true)");
             pstmt.setString(1, t.getNom());
             pstmt.setString(2, t.getPrenom());
-            pstmt.setInt(3, t.getNumCardeFidelite());
+            pstmt.setInt(3, t.getNumCarteFidelite());
             pstmt.setString(4, t.getMail());
             pstmt.setInt(5, t.getCodePostal());
             pstmt.execute();
             pstmt.close();
+
+            JOptionPane.showMessageDialog(null, "Le client " + t.getNom() + " a été ajouter avec succés", "Ajout d'un client", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -105,12 +108,14 @@ public class ClientDAO implements DAO<Client> {
             PreparedStatement pstmt = con.prepareStatement("UPDATE Client SET nom=?, prenom=?, numCarteFidelite=?, mail=?, codePostal=? WHERE id=?");
             pstmt.setString(1, t.getNom());
             pstmt.setString(2, t.getPrenom());
-            pstmt.setInt(3, t.getNumCardeFidelite());
+            pstmt.setInt(3, t.getNumCarteFidelite());
             pstmt.setString(4, t.getMail());
             pstmt.setInt(5, t.getCodePostal());
             pstmt.setInt(6, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
+
+            JOptionPane.showMessageDialog(null, "Le client " + t.getNom() + " a été mis à jour avec succés", "M.A.J d'un client", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -124,6 +129,8 @@ public class ClientDAO implements DAO<Client> {
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
+
+            JOptionPane.showMessageDialog(null, "Le client " + t.getNom() + " a été supprimer avec succés", "Suppression d'un client", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -107,7 +107,6 @@ public class PersonnelDAO implements DAO<Personnel> {
             pstmt.close();
             
             JOptionPane.showMessageDialog(null, "Le personnel " + t.getNom() + " a été ajouté avec succés", "Ajout d'un personnel", JOptionPane.INFORMATION_MESSAGE);
-            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
