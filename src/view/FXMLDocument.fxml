@@ -88,7 +88,7 @@
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
                         <Pane layoutX="11.0" layoutY="41.0" maxWidth="647.0" prefHeight="499.0" prefWidth="647.0">
                            <children>
-                              <TabPane fx:id="inventaire" prefHeight="499.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE" visible="false">
+                              <TabPane fx:id="inventaire" prefHeight="499.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
                                   <Tab closable="false" text="Afficher les Produits">
                                     <content>
@@ -242,7 +242,7 @@
                                     </Tab>
                                  </tabs>
                               </TabPane>
-                              <TabPane fx:id="gClients" layoutY="4.0" prefHeight="499.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE">
+                              <TabPane fx:id="gClients" layoutY="4.0" prefHeight="499.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE" visible="false">
                                  <tabs>
                                     <Tab closable="false" text="Afficher les clients">
                                        <content>
@@ -317,6 +317,7 @@
                               <Insets />
                            </opaqueInsets>
                         </Pane>
+                        <TextField fx:id="filterField" layoutX="417.0" layoutY="8.0" prefHeight="25.0" prefWidth="233.0" promptText="Filtrer par nom / prenom / identifiant" />
               </children>
             </AnchorPane>
           </content>

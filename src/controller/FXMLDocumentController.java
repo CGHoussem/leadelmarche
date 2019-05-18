@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,6 +40,8 @@ public class FXMLDocumentController implements Initializable {
     private TabPane gPersonnels;
     @FXML
     private TabPane gClients;
+    @FXML
+    private TextField filterField;
     // Produits TextFields
     @FXML
     private TextField nomProduit;
@@ -173,15 +176,70 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void fillStaffTable() {
-        tablePersonnels.getItems().setAll(new PersonnelDAO().getAll());
+        ObservableList<Personnel> masterData = FXCollections.observableArrayList();
+        masterData.setAll(new PersonnelDAO().getAll());
+        FilteredList<Personnel> filteredData = new FilteredList<>(masterData, p -> true);
+
+        filterField.textProperty().addListener((obs, oldValue, newValue) -> {
+            filteredData.setPredicate(personnel -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (personnel.getNom().toLowerCase().contains(lowerCaseFilter) || 
+                        personnel.getPrenom().toLowerCase().contains(lowerCaseFilter) ||
+                        String.valueOf(personnel.getNumBadge()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        tablePersonnels.setItems(filteredData);
     }
 
     private void fillProductTable() {
-        tableProduits.getItems().setAll(new ProduitDAO().getAll());
+        ObservableList<Produit> masterData = FXCollections.observableArrayList();
+        masterData.setAll(new ProduitDAO().getAll());
+        FilteredList<Produit> filteredData = new FilteredList<>(masterData, p -> true);
+
+        filterField.textProperty().addListener((obs, oldValue, newValue) -> {
+            filteredData.setPredicate(produit -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (produit.getNom().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        tableProduits.setItems(filteredData);
     }
 
     private void fillClientTable() {
-        tableClients.getItems().setAll(new ClientDAO().getAll());
+        ObservableList<Client> masterData = FXCollections.observableArrayList();
+        masterData.setAll(new ClientDAO().getAll());
+        FilteredList<Client> filteredData = new FilteredList<>(masterData, c -> true);
+
+        filterField.textProperty().addListener((obs, oldValue, newValue) -> {
+            filteredData.setPredicate(client -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (client.getNom().toLowerCase().contains(lowerCaseFilter) || 
+                        client.getPrenom().toLowerCase().contains(lowerCaseFilter) ||
+                        String.valueOf(client.getNumCarteFidelite()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        tableClients.setItems(filteredData);
     }
 
     private void fillProductChoiceBox() {
