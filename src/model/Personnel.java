@@ -30,12 +30,13 @@ public class Personnel {
     private String poste;
     private Personnel superieur;
     private int numBadge;
+    private String mdp;
 
-    public Personnel(){
-        
+    public Personnel() {
+
     }
-    
-    public Personnel(int id, String nom, String prenom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge) {
+
+    public Personnel(int id, String nom, String prenom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge, String mdp) {
         this.id = id;
         this.nom = nom.toUpperCase();
         this.prenom = prenom;
@@ -44,9 +45,10 @@ public class Personnel {
         this.poste = poste;
         this.superieur = superieur;
         this.numBadge = numBadge;
+        this.mdp = mdp;
     }
 
-    public Personnel(String nom, String prenom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge) {
+    public Personnel(String nom, String prenom, String adressePerso, String adresseTravail, String poste, Personnel superieur, int numBadge, String mdp) {
         this.nom = nom.toUpperCase();
         this.prenom = prenom;
         this.adressePerso = adressePerso;
@@ -54,6 +56,7 @@ public class Personnel {
         this.poste = poste;
         this.superieur = superieur;
         this.numBadge = numBadge;
+        this.mdp = mdp;
     }
 
     public int getId() {
@@ -71,7 +74,7 @@ public class Personnel {
     public void setNom(String nom) {
         this.nom = nom.toUpperCase();
     }
-    
+
     public String getPrenom() {
         return prenom;
     }
@@ -120,8 +123,16 @@ public class Personnel {
         this.numBadge = numBadge;
     }
     
+    public String getMdp(){
+        return mdp;
+    }
+    
+    public void setMdp(String mdp){
+        this.mdp = mdp;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return nom + " " + prenom;
     }
 

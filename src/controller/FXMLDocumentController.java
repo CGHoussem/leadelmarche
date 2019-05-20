@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import model.Personnel;
 
 /**
  *
@@ -22,66 +23,93 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     TextField filterField;
 
+    boolean isConnected = false;
+    Personnel caissier = null;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        afficherConnexion();
+        filterField.setVisible(false);
     }
 
-    @FXML
-    private void afficherInventaire(ActionEvent event) {
+    private void afficherConnexion() {
         try {
             mainContainer.getChildren().clear();
-            URL x = FXMLDocumentController.class.getResource("/view/InventaireFXML.fxml");
+            URL x = FXMLDocumentController.class.getResource("/view/ConnexionFXML.fxml");
             FXMLLoader loader = new FXMLLoader(x);
-            loader.setController(new InventaireFXMLController(this));
+            loader.setController(new ConnexionFXMLController(this));
             Node pane = loader.load();
             mainContainer.getChildren().add(pane);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             System.exit(1);
+        }
+    }
+
+    @FXML
+    void afficherInventaire(ActionEvent event) {
+        if (isConnected) {
+            try {
+                mainContainer.getChildren().clear();
+                URL x = FXMLDocumentController.class.getResource("/view/InventaireFXML.fxml");
+                FXMLLoader loader = new FXMLLoader(x);
+                loader.setController(new InventaireFXMLController(this));
+                Node pane = loader.load();
+                mainContainer.getChildren().add(pane);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
         }
     }
 
     @FXML
     private void afficherPtsVente(ActionEvent event) {
-        try {
-            mainContainer.getChildren().clear();
-            URL x = FXMLDocumentController.class.getResource("/view/PointsVenteFXML.fxml");
-            FXMLLoader loader = new FXMLLoader(x);
-            Node pane = loader.load();
-            mainContainer.getChildren().add(pane);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            System.exit(1);
+        if (isConnected) {
+            try {
+                mainContainer.getChildren().clear();
+                URL x = FXMLDocumentController.class.getResource("/view/PointsVenteFXML.fxml");
+                FXMLLoader loader = new FXMLLoader(x);
+                Node pane = loader.load();
+                mainContainer.getChildren().add(pane);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
         }
     }
 
     @FXML
     private void afficherPersonnels(ActionEvent event) {
-        try {
-            mainContainer.getChildren().clear();
-            URL x = FXMLDocumentController.class.getResource("/view/PersonnelsFXML.fxml");
-            FXMLLoader loader = new FXMLLoader(x);
-            loader.setController(new PersonnelsFXMLController(this));
-            Node pane = loader.load();
-            mainContainer.getChildren().add(pane);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            System.exit(1);
+        if (isConnected) {
+            try {
+                mainContainer.getChildren().clear();
+                URL x = FXMLDocumentController.class.getResource("/view/PersonnelsFXML.fxml");
+                FXMLLoader loader = new FXMLLoader(x);
+                loader.setController(new PersonnelsFXMLController(this));
+                Node pane = loader.load();
+                mainContainer.getChildren().add(pane);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
         }
     }
 
     @FXML
     private void afficherClients(ActionEvent event) {
-        try {
-            mainContainer.getChildren().clear();
-            URL x = FXMLDocumentController.class.getResource("/view/ClientsFXML.fxml");
-            FXMLLoader loader = new FXMLLoader(x);
-            loader.setController(new ClientsFXMLController(this));
-            Node pane = loader.load();
-            mainContainer.getChildren().add(pane);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            System.exit(1);
+        if (isConnected) {
+            try {
+                mainContainer.getChildren().clear();
+                URL x = FXMLDocumentController.class.getResource("/view/ClientsFXML.fxml");
+                FXMLLoader loader = new FXMLLoader(x);
+                loader.setController(new ClientsFXMLController(this));
+                Node pane = loader.load();
+                mainContainer.getChildren().add(pane);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
         }
     }
 

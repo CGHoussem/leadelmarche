@@ -16,6 +16,7 @@
  */
 package controller;
 
+import Utility.RandomString;
 import dao.PersonnelDAO;
 import java.net.URL;
 import java.util.Random;
@@ -56,6 +57,8 @@ public class PersonnelsFXMLController implements Initializable {
     private TextField posteTF;
     @FXML
     private ChoiceBox superieurCB;
+    @FXML
+    private TextField mdpTF;
     // Table Personnels
     @FXML
     private TableView<Personnel> tablePersonnels;
@@ -93,13 +96,13 @@ public class PersonnelsFXMLController implements Initializable {
     }
 
     private void initializeStaffTableColumns() {
-        NumBadgeCol.setCellValueFactory(new PropertyValueFactory<Personnel, Integer>("numBadge"));
-        NomPersoCol.setCellValueFactory(new PropertyValueFactory<Personnel, String>("nom"));
-        PrenomPersoCol.setCellValueFactory(new PropertyValueFactory<Personnel, String>("prenom"));
-        AdrPersoCol.setCellValueFactory(new PropertyValueFactory<Personnel, String>("adressePerso"));
-        AdrTravailCol.setCellValueFactory(new PropertyValueFactory<Personnel, String>("adresseTravail"));
-        PostePersoCol.setCellValueFactory(new PropertyValueFactory<Personnel, String>("poste"));
-        SupPersoCol.setCellValueFactory(new PropertyValueFactory<Personnel, Personnel>("superieur"));
+        NumBadgeCol.setCellValueFactory(new PropertyValueFactory<>("numBadge"));
+        NomPersoCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        PrenomPersoCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        AdrPersoCol.setCellValueFactory(new PropertyValueFactory<>("adressePerso"));
+        AdrTravailCol.setCellValueFactory(new PropertyValueFactory<>("adresseTravail"));
+        PostePersoCol.setCellValueFactory(new PropertyValueFactory<>("poste"));
+        SupPersoCol.setCellValueFactory(new PropertyValueFactory<>("superieur"));
     }
 
     private void fillStaffTable() {
@@ -124,7 +127,7 @@ public class PersonnelsFXMLController implements Initializable {
 
         tablePersonnels.setItems(filteredData);
     }
-    
+
     @FXML
     private void ajouterPersonnel(ActionEvent event) {
         if (!numBadgeTF.getText().isEmpty()
@@ -132,7 +135,8 @@ public class PersonnelsFXMLController implements Initializable {
                 && !prenomTF.getText().isEmpty()
                 && !adrPersoTF.getText().isEmpty()
                 && !adrTravailTF.getText().isEmpty()
-                && !posteTF.getText().isEmpty()) {
+                && !posteTF.getText().isEmpty()
+                && !mdpTF.getText().isEmpty()) {
             int numBadge = Integer.parseInt(numBadgeTF.getText());
             Personnel sup = null;
             if (superieurCB.getSelectionModel().getSelectedIndex() != -1) {
@@ -145,7 +149,8 @@ public class PersonnelsFXMLController implements Initializable {
                     adrTravailTF.getText(),
                     posteTF.getText(),
                     sup,
-                    numBadge
+                    numBadge,
+                    mdpTF.getText()
             );
             new PersonnelDAO().add(p);
 
@@ -156,13 +161,19 @@ public class PersonnelsFXMLController implements Initializable {
             JOptionPane.showMessageDialog(null, "Vérifier vos données!", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     @FXML
     private void generateNumBadge(ActionEvent event) {
         Random r = new Random();
         numBadgeTF.setText(String.valueOf(r.nextInt() & Integer.MAX_VALUE));
     }
-    
+
+    @FXML
+    private void generatePassword(ActionEvent event) {
+        String generatedString = RandomString.getAlphaNumericString(8);
+        mdpTF.setText(generatedString);
+    }
+
     @FXML
     private void resetPersoForm(ActionEvent event) {
         numBadgeTF.clear();
@@ -171,6 +182,7 @@ public class PersonnelsFXMLController implements Initializable {
         adrPersoTF.clear();
         adrTravailTF.clear();
         posteTF.clear();
+        mdpTF.clear();
     }
 
 }

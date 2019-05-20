@@ -33,12 +33,12 @@ import model.Personnel;
 public class PersonnelDAO implements DAO<Personnel> {
 
     @Override
-    public Personnel get(int id) {
+    public Personnel get(int numBadge) {
         Personnel p = null;
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel WHERE id = ?");
-            pstmt.setInt(1, id);
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel WHERE numBadge = ?");
+            pstmt.setInt(1, numBadge);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 p = new Personnel(
@@ -49,7 +49,8 @@ public class PersonnelDAO implements DAO<Personnel> {
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
                         this.get(rs.getInt("superieur")),
-                        rs.getInt("numBadge")
+                        rs.getInt("numBadge"),
+                        rs.getString("mdp")
                 );
             }
             rs.close();
@@ -76,7 +77,8 @@ public class PersonnelDAO implements DAO<Personnel> {
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
                         this.get(rs.getInt("superieur")),
-                        rs.getInt("numBadge")
+                        rs.getInt("numBadge"),
+                        rs.getString("mdp")
                 ));
             }
             rs.close();
@@ -86,7 +88,7 @@ public class PersonnelDAO implements DAO<Personnel> {
         }
         return personnels;
     }
-    
+
     public List<Personnel> getAllCaissier() {
         List<Personnel> personnels = new ArrayList<>();
         try {
@@ -102,7 +104,8 @@ public class PersonnelDAO implements DAO<Personnel> {
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
                         this.get(rs.getInt("superieur")),
-                        rs.getInt("numBadge")
+                        rs.getInt("numBadge"),
+                        rs.getString("mdp")
                 ));
             }
             rs.close();
@@ -112,12 +115,12 @@ public class PersonnelDAO implements DAO<Personnel> {
         }
         return personnels;
     }
-    
+
     @Override
     public void add(Personnel t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Personnel VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, true)");
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Personnel VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, MD5(?), true)");
             pstmt.setString(1, t.getNom());
             pstmt.setString(2, t.getPrenom());
             pstmt.setString(3, t.getAdressePerso());
@@ -128,10 +131,11 @@ public class PersonnelDAO implements DAO<Personnel> {
             } else {
                 pstmt.setInt(6, t.getSuperieur().getId());
             }
-            pstmt.setInt(7, t.getNumBadge());
+            pstmt.setString(7, t.getMdp());
+            pstmt.setInt(8, t.getNumBadge());
             pstmt.execute();
             pstmt.close();
-            
+
             JOptionPane.showMessageDialog(null, "Le personnel " + t.getNom() + " a été ajouté avec succés", "Ajout d'un personnel", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());

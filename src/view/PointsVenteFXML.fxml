@@ -64,7 +64,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nomPtVenteTF" prefHeight="25.0" prefWidth="161.0" promptText="Entrez le nom du point de vente" GridPane.columnIndex="1" />
+                              <TextField fx:id="nomPtVenteTF" prefHeight="25.0" prefWidth="181.0" promptText="Entrez le nom du point de vente" text="PT. 01" GridPane.columnIndex="1" />
                               <ComboBox fx:id="caissierCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <CheckBox fx:id="anonymousClient" mnemonicParsing="false" onAction="#anonymousAction" selected="true" text="Anonyme" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <ComboBox fx:id="clientCB" disable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />

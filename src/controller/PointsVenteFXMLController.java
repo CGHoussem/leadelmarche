@@ -68,6 +68,10 @@ public class PointsVenteFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         produitsAAchetes = new ArrayList<>();
         fillCaissierCB();
+        nbrProduitsLabel.setText("0 produits");
+        sousTotalLabel.setText("SOUS TOTAL: 0 €");
+        TVALabel.setText("TVA: 0%");
+        totalLabel.setText("TOTAL: 0 €");
     }
 
     private void fillCaissierCB() {
@@ -115,7 +119,8 @@ public class PointsVenteFXMLController implements Initializable {
 
     @FXML
     private void resetVenteForm(ActionEvent e) {
-
+        produitsAAchetes.clear();
+        updateFields();
     }
 
     void updateFields() {
