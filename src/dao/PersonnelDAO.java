@@ -86,7 +86,33 @@ public class PersonnelDAO implements DAO<Personnel> {
         }
         return personnels;
     }
-
+    
+    public List<Personnel> getAllCaissier() {
+        List<Personnel> personnels = new ArrayList<>();
+        try {
+            Connection con = Connexion.getInstance();
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel WHERE poste='caissier' AND active=true");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                personnels.add(new Personnel(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("adressePerso"),
+                        rs.getString("adresseTravail"),
+                        rs.getString("poste"),
+                        this.get(rs.getInt("superieur")),
+                        rs.getInt("numBadge")
+                ));
+            }
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return personnels;
+    }
+    
     @Override
     public void add(Personnel t) {
         try {

@@ -95,7 +95,7 @@ public class VenteDAO implements DAO<Vente> {
         List<Vente> ventes = new ArrayList<>();
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Vente");
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Vente WHERE active=true");
             ResultSet rs = pstmt.executeQuery();
             ClientDAO cdao = new ClientDAO();
             PersonnelDAO pdao = new PersonnelDAO();
@@ -123,7 +123,7 @@ public class VenteDAO implements DAO<Vente> {
     public void add(Vente t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Vente VALUES(NULL, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Vente VALUES(NULL, ?, ?, ?, ?, ?, ?, true)");
             pstmt.setString(1, t.getNom());
             pstmt.setInt(2, t.getCaissier().getId());
             pstmt.setInt(3, t.getClient().getId());
@@ -165,7 +165,7 @@ public class VenteDAO implements DAO<Vente> {
     public void delete(Vente t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("DELETE FROM Vente WHERE id=?");
+            PreparedStatement pstmt = con.prepareStatement("UPDATE Vente SET active=false WHERE id=?");
             pstmt.setInt(1, t.getId());
             pstmt.execute();
             pstmt.close();

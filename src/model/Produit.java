@@ -127,4 +127,9 @@ public class Produit {
         this.nomFournisseur = nomFournisseur;
     }
 
+    @Override
+    public String toString(){
+        return nom;
+    }
+    
 }

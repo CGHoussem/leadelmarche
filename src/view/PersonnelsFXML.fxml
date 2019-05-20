@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane fx:id="gPersonnels" layoutX="11.0" layoutY="14.0" prefHeight="513.0" prefWidth="658.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab closable="false" text="Afficher les Personnels">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tablePersonnels" prefHeight="484.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="NumBadgeCol" editable="false" prefWidth="101.0" text="# badge" />
+                                        <TableColumn fx:id="NomPersoCol" editable="false" minWidth="0.0" prefWidth="79.0" text="Nom" />
+                                        <TableColumn fx:id="PrenomPersoCol" editable="false" prefWidth="90.0" text="Prénom" />
+                                        <TableColumn fx:id="AdrPersoCol" editable="false" prefWidth="150.0" sortable="false" text="\@ personnelle" />
+                                        <TableColumn fx:id="AdrTravailCol" editable="false" prefWidth="150.0" sortable="false" text="\@ lieu de travail" />
+                                        <TableColumn fx:id="PostePersoCol" editable="false" prefWidth="90.0" sortable="false" text="Poste / Fonction" />
+                                        <TableColumn fx:id="SupPersoCol" editable="false" minWidth="0.0" prefWidth="105.0" text="Supérieur" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Ajouter un Personnel">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox alignment="TOP_CENTER" layoutX="6.0" prefHeight="295.0" prefWidth="638.0" spacing="10.0">
+                                    <children>
+                                        <GridPane>
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="215.0" />
+                                                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="253.0" minWidth="0.0" prefWidth="164.0" />
+                                                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="250.0" minWidth="0.0" prefWidth="250.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <TextField fx:id="numBadgeTF" editable="false" prefWidth="150.0" promptText="# Badge" GridPane.columnIndex="1" />
+                                                <Button mnemonicParsing="false" onAction="#generateNumBadge" text="Génerer # Badge" GridPane.columnIndex="2" />
+                                                <TextField fx:id="nomTF" prefWidth="150.0" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <TextField fx:id="prenomTF" prefWidth="150.0" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="adrPersoTF" prefWidth="150.0" promptText="\@ personnelle" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="adrTravailTF" prefWidth="150.0" promptText="\@ de lieu de travail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <TextField fx:id="posteTF" prefWidth="150.0" promptText="Poste / Fonction" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <ChoiceBox fx:id="superieurCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <Label text="Num Badge" />
+                                                <Label text="Nom" GridPane.rowIndex="1" />
+                                                <Label text="Prénom" GridPane.rowIndex="2" />
+                                                <Label text="Adresse personnelle" GridPane.rowIndex="3" />
+                                                <Label text="Adresse de lieu de travail" GridPane.rowIndex="4" />
+                                                <Label text="Poste / Fonction" GridPane.rowIndex="5" />
+                                                <Label text="Supérieur immédiat" GridPane.rowIndex="6" />
+                                            </children>
+                                        </GridPane>
+                                        <HBox alignment="CENTER" spacing="50.0">
+                                            <children>
+                                                <Button cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetPersoForm" prefHeight="35.0" prefWidth="100.0" text="Rénitialiser" />
+                                                <Button defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ajouterPersonnel" prefHeight="35.0" prefWidth="100.0" text="Ajouter" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

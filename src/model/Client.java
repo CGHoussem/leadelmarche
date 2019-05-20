@@ -97,4 +97,9 @@ public class Client {
         this.codePostal = codePostal;
     }
 
+    @Override
+    public String toString() {
+        return numCarteFidelite + " | " + nom + " " + prenom;
+    }
+
 }
