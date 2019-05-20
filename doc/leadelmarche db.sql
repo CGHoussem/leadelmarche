@@ -1,219 +1,224 @@
-<!DOCTYPE HTML><html lang='fr' dir='ltr' class='chrome chrome74'><head><meta charset="utf-8" /><meta name="referrer" content="no-referrer" /><meta name="robots" content="noindex,nofollow" /><meta http-equiv="X-UA-Compatible" content="IE=Edge"><style id="cfs-style">html{display: none;}</style><link rel="icon" href="favicon.ico" type="image/x-icon" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><link rel="stylesheet" type="text/css" href="./themes/pmahomme/jquery/jquery-ui-1.11.4.css" /><link rel="stylesheet" type="text/css" href="js/codemirror/lib/codemirror.css?v=4.6.4" /><link rel="stylesheet" type="text/css" href="js/codemirror/addon/hint/show-hint.css?v=4.6.4" /><link rel="stylesheet" type="text/css" href="js/codemirror/addon/lint/lint.css?v=4.6.4" /><link rel="stylesheet" type="text/css" href="phpmyadmin.css.php?nocache=5972462879ltr" /><link rel="stylesheet" type="text/css" href="./themes/pmahomme/css/printview.css?v=4.6.4" media="print" id="printcss"/><title>localhost / Local Databases | phpMyAdmin 4.6.4</title><script data-cfasync='false' type='text/javascript' src='js/whitelist.php?lang=fr&amp;db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d&v=4.6.4'></script><script data-cfasync="false" type="text/javascript" src="js/get_scripts.js.php?scripts%5B%5D=jquery/jquery-2.1.4.min.js&amp;scripts%5B%5D=sprintf.js&amp;scripts%5B%5D=ajax.js&amp;scripts%5B%5D=keyhandler.js&amp;scripts%5B%5D=jquery/jquery-ui-1.11.4.min.js&amp;scripts%5B%5D=jquery/jquery.cookie.js&amp;scripts%5B%5D=jquery/jquery.mousewheel.js&amp;scripts%5B%5D=jquery/jquery.event.drag-2.2.js&amp;scripts%5B%5D=jquery/jquery-ui-timepicker-addon.js&amp;scripts%5B%5D=jquery/jquery.ba-hashchange-1.3.js&amp;v=4.6.4"></script><script data-cfasync="false" type="text/javascript" src="js/get_scripts.js.php?scripts%5B%5D=jquery/jquery.debounce-1.0.5.js&amp;scripts%5B%5D=menu-resizer.js&amp;scripts%5B%5D=cross_framing_protection.js&amp;scripts%5B%5D=rte.js&amp;scripts%5B%5D=tracekit/tracekit.js&amp;scripts%5B%5D=error_report.js&amp;scripts%5B%5D=config.js&amp;scripts%5B%5D=doclinks.js&amp;scripts%5B%5D=functions.js&amp;scripts%5B%5D=navigation.js&amp;v=4.6.4"></script><script data-cfasync="false" type="text/javascript" src="js/get_scripts.js.php?scripts%5B%5D=indexes.js&amp;scripts%5B%5D=common.js&amp;scripts%5B%5D=page_settings.js&amp;scripts%5B%5D=codemirror/lib/codemirror.js&amp;scripts%5B%5D=codemirror/mode/sql/sql.js&amp;scripts%5B%5D=codemirror/addon/runmode/runmode.js&amp;scripts%5B%5D=codemirror/addon/hint/show-hint.js&amp;scripts%5B%5D=codemirror/addon/hint/sql-hint.js&amp;scripts%5B%5D=codemirror/addon/lint/lint.js&amp;scripts%5B%5D=codemirror/addon/lint/sql-lint.js&amp;v=4.6.4"></script><script data-cfasync="false" type="text/javascript" src="js/get_scripts.js.php?scripts%5B%5D=console.js&amp;v=4.6.4"></script><script data-cfasync='false' type='text/javascript' src='js/messages.php?lang=fr&amp;db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d&v=4.6.4'></script><script data-cfasync='false' type='text/javascript' src='js/get_image.js.php?theme=pmahomme&v=4.6.4'></script><script data-cfasync="false" type="text/javascript">// <![CDATA[
-PMA_commonParams.setAll({common_query:"?token=9bff93bf0b194ecf27fbeaaadd43c73d",opendb_url:"db_structure.php",safari_browser:"0",collation_connection:"utf8mb4_unicode_ci",lang:"fr",server:"1",table:"",db:"",token:"9bff93bf0b194ecf27fbeaaadd43c73d",text_dir:"ltr",show_databases_navigation_as_tree:"1",pma_text_default_tab:"Afficher",pma_text_left_default_tab:"Structure",pma_text_left_default_tab2:"",LimitChars:"50",pftext:"",confirm:"1",LoginCookieValidity:"1440",logged_in:"1",PMA_VERSION:"4.6.4",auth_type:"cookie"});
-ConsoleEnterExecutes=false
-AJAX.scriptHandler.add("jquery/jquery-2.1.4.min.js",0).add("whitelist.php?lang=fr&amp;db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d",1).add("sprintf.js",1).add("ajax.js",0).add("keyhandler.js",1).add("jquery/jquery-ui-1.11.4.min.js",0).add("jquery/jquery.cookie.js",0).add("jquery/jquery.mousewheel.js",0).add("jquery/jquery.event.drag-2.2.js",0).add("jquery/jquery-ui-timepicker-addon.js",0).add("jquery/jquery.ba-hashchange-1.3.js",0).add("jquery/jquery.debounce-1.0.5.js",0).add("menu-resizer.js",1).add("cross_framing_protection.js",0).add("rte.js",1).add("tracekit/tracekit.js",1).add("error_report.js",1).add("messages.php?lang=fr&amp;db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d",0).add("get_image.js.php?theme=pmahomme",0).add("config.js",1).add("doclinks.js",1).add("functions.js",1).add("navigation.js",1).add("indexes.js",1).add("common.js",1).add("page_settings.js",1).add("codemirror/lib/codemirror.js",0).add("codemirror/mode/sql/sql.js",0).add("codemirror/addon/runmode/runmode.js",0).add("codemirror/addon/hint/show-hint.js",0).add("codemirror/addon/hint/sql-hint.js",0).add("codemirror/addon/lint/lint.js",0).add("codemirror/addon/lint/sql-lint.js",0).add("console.js",1);
-$(function() {AJAX.fireOnload("whitelist.php?lang=fr&amp;db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d");AJAX.fireOnload("sprintf.js");AJAX.fireOnload("keyhandler.js");AJAX.fireOnload("menu-resizer.js");AJAX.fireOnload("rte.js");AJAX.fireOnload("tracekit/tracekit.js");AJAX.fireOnload("error_report.js");AJAX.fireOnload("config.js");AJAX.fireOnload("doclinks.js");AJAX.fireOnload("functions.js");AJAX.fireOnload("navigation.js");AJAX.fireOnload("indexes.js");AJAX.fireOnload("common.js");AJAX.fireOnload("page_settings.js");AJAX.fireOnload("console.js");});
-// ]]></script><noscript><style>html{display:block}</style></noscript></head><body><div id="pma_navigation"><div id="pma_navigation_resizer"></div><div id="pma_navigation_collapser"></div><div id="pma_navigation_content"><div id="pma_navigation_header"><a class="hide navigation_url" href="navigation.php?ajax_request=1&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"></a><!-- LOGO START -->
-<div id="pmalogo">
-            <a href="index.php?token=9bff93bf0b194ecf27fbeaaadd43c73d">
-        <img src="./themes/pmahomme/img/logo_left.png" alt="phpMyAdmin" id="imgpmalogo" />            </a>
-    </div>
-<!-- LOGO END --><!-- LINKS START --><div id="navipanellinks"><a href="index.php?token=9bff93bf0b194ecf27fbeaaadd43c73d" title="Accueil"><img src="themes/dot.gif" title="Accueil" alt="Accueil" class="icon ic_b_home" /></a><a href="logout.php?token=9bff93bf0b194ecf27fbeaaadd43c73d" class="disableAjax" title="Quitter"><img src="themes/dot.gif" title="Quitter" alt="Quitter" class="icon ic_s_loggoff" /></a><a href="./doc/html/index.html" target="documentation" title="Documentation de phpMyAdmin"><img src="themes/dot.gif" title="Documentation de phpMyAdmin" alt="Documentation de phpMyAdmin" class="icon ic_b_docs" /></a><a href="./url.php?url=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Findex.html" target="mysql_doc" title="Documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_sqlhelp" /></a><a href="#" id="pma_navigation_settings_icon" title="Paramètres du panneau de navigation"><img src="themes/dot.gif" title="Paramètres du panneau de navigation" alt="Paramètres du panneau de navigation" class="icon ic_s_cog" /></a><a href="#" id="pma_navigation_reload" title="Actualiser le panneau de navigation"><img src="themes/dot.gif" title="Actualiser le panneau de navigation" alt="Actualiser le panneau de navigation" class="icon ic_s_reload" /></a></div><!-- LINKS ENDS --><img src="./themes/pmahomme/img/ajax_clock_small.gif" title="Chargement en cours…" alt="Chargement en cours…" style="visibility: hidden; display:none" class="throbber" /></div><div id="pma_navigation_tree" class="list_container synced highlight"><div class="pma_quick_warp"><div class="drop_list"><span title="Tables récentes" class="drop_button">Récentes</span><ul id="pma_recent_list"><li class="warp_link">Il n'y a pas de tables récentes.</li></ul></div><div class="drop_list"><span title="Tables préférées" class="drop_button">Préférées</span><ul id="pma_favorite_list"><li class="warp_link">Il n'y a pas de tables préférées.</li></ul></div><div class="clearfloat"></div></div><div class="clearfloat"></div><ul><!-- CONTROLS START --><li id="navigation_controls_outer"><div id="navigation_controls"><a href="#" id="pma_navigation_collapse" title="Tout réduire"><img src="./themes/pmahomme/img/s_collapseall.png" title="Tout réduire" alt="Tout réduire" /></a><a href="#" id="pma_navigation_sync" title="Supprimer la liaison au panneau principal"><img src="themes/dot.gif" title="Supprimer la liaison au panneau principal" alt="Supprimer la liaison au panneau principal" class="icon ic_s_link" /></a></div></li><!-- CONTROLS ENDS --></ul><div id='pma_navigation_tree_content'><ul><li class="first new_database italics"><div class='block'><i class='first'></i></div><div class='block '><a href='server_databases.php?server=1&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="" alt="" class="icon ic_b_newdb" /></a></div><a class='hover_show_full' href='server_databases.php?server=1&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title=''>Nouvelle base de données</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.YmRfZmFzdHNob3A=</span><span class='hide vPath'>cm9vdA==.YmRfZmFzdHNob3A=</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=bd_fastshop&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=bd_fastshop&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>bd_fastshop</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.ZG9uYXRpb25z</span><span class='hide vPath'>cm9vdA==.ZG9uYXRpb25z</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=donations&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=donations&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>donations</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.aW5mb3JtYXRpb25fc2NoZW1h</span><span class='hide vPath'>cm9vdA==.aW5mb3JtYXRpb25fc2NoZW1h</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=information_schema&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=information_schema&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>information_schema</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.bGVhZGVsbWFyY2hl</span><span class='hide vPath'>cm9vdA==.bGVhZGVsbWFyY2hl</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=leadelmarche&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=leadelmarche&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>leadelmarche</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.bG9sYWRhcHQ=</span><span class='hide vPath'>cm9vdA==.bG9sYWRhcHQ=</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=loladapt&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=loladapt&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>loladapt</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.bXlzcWw=</span><span class='hide vPath'>cm9vdA==.bXlzcWw=</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=mysql&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=mysql&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>mysql</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.cDJwYmQ=</span><span class='hide vPath'>cm9vdA==.cDJwYmQ=</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=p2pbd&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=p2pbd&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>p2pbd</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.cGVyZm9ybWFuY2Vfc2NoZW1h</span><span class='hide vPath'>cm9vdA==.cGVyZm9ybWFuY2Vfc2NoZW1h</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=performance_schema&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=performance_schema&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>performance_schema</a><div class="clearfloat"></div></li><li class="database"><div class='block'><i></i><b></b><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.c2FtcF9ycA==</span><span class='hide vPath'>cm9vdA==.c2FtcF9ycA==</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=samp_rp&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=samp_rp&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>samp_rp</a><div class="clearfloat"></div></li><li class="last database"><div class='block'><i></i><a class="expander" href='#'><span class='hide aPath'>cm9vdA==.c3lz</span><span class='hide vPath'>cm9vdA==.c3lz</span><span class='hide pos'>0</span><img src="themes/dot.gif" title="Développer/réduire" alt="Développer/réduire" class="icon ic_b_plus" /></a></div><div class='block '><a href='db_operations.php?server=1&amp;db=sys&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d'><img src="themes/dot.gif" title="Opérations sur base de données" alt="Opérations sur base de données" class="icon ic_s_db" /></a></div><a class='hover_show_full' href='db_structure.php?server=1&amp;db=sys&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d' title='Structure'>sys</a><div class="clearfloat"></div></li></ul></div></div><div id="pma_navi_settings_container"><div id="pma_navigation_settings"><div class="page_settings"><form method="post" action="export.php?db=&amp;table=&amp;server=1&amp;target=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d" class="config-form disableAjax"><input type="hidden" name="tab_hash" value="" /><input type="hidden" name="check_page_refresh"  id="check_page_refresh" value="" />
-<input type="hidden" name="token" value="9bff93bf0b194ecf27fbeaaadd43c73d" />
-<input type="hidden" name="submit_save" value="Navi_panel" /><ul class="tabs"    >
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Client :  127.0.0.1
+-- Généré le :  Lun 20 Mai 2019 à 23:06
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
 
-                                    <li     >
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-            <a href="#Navi_panel"                                        >
-            Panneau de navigation            </a>
-        </li>
-                                <li     >
 
-            <a href="#Navi_tree"                                        >
-            Arborescence de navigation            </a>
-        </li>
-                                <li     >
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-            <a href="#Navi_databases"                                        >
-            Bases de données            </a>
-        </li>
-                                <li     >
+--
+-- Base de données :  `leadelmarche`
+--
+CREATE DATABASE IF NOT EXISTS `leadelmarche` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `leadelmarche`;
 
-            <a href="#Navi_tables"                                        >
-            Tables            </a>
-        </li>
-            </ul><br clear="right" /><div class="tabs_contents"><fieldset class="optbox" id="Navi_panel"><legend>Panneau de navigation</legend><p>Personnaliser l'apparence du panneau de navigation.</p><table width="100%" cellspacing="0"><tr><th><label for="ShowDatabasesNavigationAsTree">Afficher la navigation de bases de données en tant qu'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_ShowDatabasesNavigationAsTree" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Dans le volet de navigation, remplace l'arborescence de la base de données par un sélecteur</small></th><td><span class="checkbox"><input type="checkbox" name="ShowDatabasesNavigationAsTree" id="ShowDatabasesNavigationAsTree" checked="checked" /></span><a class="restore-default" href="#ShowDatabasesNavigationAsTree" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationLinkWithMainPanel">Relier au panneau principal</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationLinkWithMainPanel" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Relier au panneau principal en mettant en surbrillance la base de données ou la table active.</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationLinkWithMainPanel" id="NavigationLinkWithMainPanel" checked="checked" /></span><a class="restore-default" href="#NavigationLinkWithMainPanel" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationDisplayLogo">Affichage du logo</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationDisplayLogo" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Montrer le logo dans le panneau de navigation.</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationDisplayLogo" id="NavigationDisplayLogo" checked="checked" /></span><a class="restore-default" href="#NavigationDisplayLogo" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationLogoLink">URL du lien sous le logo</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationLogoLink" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>L'URL vers lequel pointera le logo dans le panneau de navigation.</small></th><td><input type="text" size="40" name="NavigationLogoLink" id="NavigationLogoLink" value="index.php" /><a class="restore-default" href="#NavigationLogoLink" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationLogoLinkWindow">Fenêtre-cible pour la page ouverte lors d'un clic sur le logo</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationLogoLinkWindow" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Pour la fenêtre principale, (<kbd>main</kbd>) ou dans une nouvelle fenêtre, (<kbd>new</kbd>).</small></th><td><select name="NavigationLogoLinkWindow" id="NavigationLogoLinkWindow"><option value="main" selected="selected">main</option><option value="new">new</option></select><a class="restore-default" href="#NavigationLogoLinkWindow" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreePointerEnable">Active la surbrillance</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreePointerEnable" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Faire ressortir le nom du serveur dans le panneau de navigation.</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreePointerEnable" id="NavigationTreePointerEnable" checked="checked" /></span><a class="restore-default" href="#NavigationTreePointerEnable" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="FirstLevelNavigationItems">Nombre maximum d'éléments au premier niveau</label><span class="doc"><a href="./doc/html/config.html#cfg_FirstLevelNavigationItems" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Le nombre d'éléments qui peuvent être affichés pour chaque page du premier niveau de l'arborescence de navigation.</small></th><td><input type="number" name="FirstLevelNavigationItems" id="FirstLevelNavigationItems" value="100" /><a class="restore-default" href="#FirstLevelNavigationItems" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeDisplayItemFilterMinimum">Nombre minimum d'éléments pour afficher la boîte de filtrage</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeDisplayItemFilterMinimum" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Définit le nombre minimum d'éléments (tables, vues, procédures et événements) nécessaires pour afficher la boîte de filtrage.</small></th><td><input type="number" name="NavigationTreeDisplayItemFilterMinimum" id="NavigationTreeDisplayItemFilterMinimum" value="30" /><a class="restore-default" href="#NavigationTreeDisplayItemFilterMinimum" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NumRecentTables">Tables récemment utilisées</label><span class="doc"><a href="./doc/html/config.html#cfg_NumRecentTables" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Nombre maximum de tables récentes; mettre 0 pour désactiver.</small></th><td><input type="number" name="NumRecentTables" id="NumRecentTables" value="10" /><a class="restore-default" href="#NumRecentTables" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NumFavoriteTables">Tables préférées</label><span class="doc"><a href="./doc/html/config.html#cfg_NumFavoriteTables" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Le nombre maximum de tables préférées; définir à 0 pour désactiver.</small></th><td><input type="number" name="NumFavoriteTables" id="NumFavoriteTables" value="10" /><a class="restore-default" href="#NumFavoriteTables" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr></table></fieldset><fieldset class="optbox" id="Navi_tree"><legend>Arborescence de navigation</legend><p>Personnaliser l'arborescence de navigation.</p><table width="100%" cellspacing="0"><tr><th><label for="MaxNavigationItems">Nombre maximum d'éléments dans la branche</label><span class="doc"><a href="./doc/html/config.html#cfg_MaxNavigationItems" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Le nombre d'éléments qui peuvent être affichés pour chaque page de l'arborescence de navigation.</small></th><td><input type="number" name="MaxNavigationItems" id="MaxNavigationItems" value="50" /><a class="restore-default" href="#MaxNavigationItems" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeEnableGrouping">Regrouper les éléments dans l'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeEnableGrouping" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Regrouper les éléments dans l'arborescence de navigation (déterminé par le séparateur défini dans les onglets Bases de données et Tables ci-haut).</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeEnableGrouping" id="NavigationTreeEnableGrouping" checked="checked" /></span><a class="restore-default" href="#NavigationTreeEnableGrouping" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeEnableExpansion">Permettre l'expansion de l'arborescence dans la navigation</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeEnableExpansion" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>S'il faut offrir la possibilité d'expansion de l'arborescence dans le panneau de navigation.</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeEnableExpansion" id="NavigationTreeEnableExpansion" checked="checked" /></span><a class="restore-default" href="#NavigationTreeEnableExpansion" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeShowTables">Afficher les tables dans l'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeShowTables" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Si vous souhaitez afficher les tables dans l'arborescence de navigation</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeShowTables" id="NavigationTreeShowTables" checked="checked" /></span><a class="restore-default" href="#NavigationTreeShowTables" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeShowViews">Montrer les vues dans l'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeShowViews" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Si vous souhaitez afficher les vues dans l'arborescence de navigation</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeShowViews" id="NavigationTreeShowViews" checked="checked" /></span><a class="restore-default" href="#NavigationTreeShowViews" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeShowFunctions">Montrer les fonctions dans l'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeShowFunctions" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Si vous souhaitez afficher les fonctions dans l'arborescence de navigation</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeShowFunctions" id="NavigationTreeShowFunctions" checked="checked" /></span><a class="restore-default" href="#NavigationTreeShowFunctions" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeShowProcedures">Montrer les procédures dans l'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeShowProcedures" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Si vous souhaitez afficher les procédures dans l'arborescence de navigation</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeShowProcedures" id="NavigationTreeShowProcedures" checked="checked" /></span><a class="restore-default" href="#NavigationTreeShowProcedures" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeShowEvents">Montrer les événements dans l'arborescence</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeShowEvents" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Si vous souhaitez afficher les événements dans l'arborescence de navigation</small></th><td><span class="checkbox"><input type="checkbox" name="NavigationTreeShowEvents" id="NavigationTreeShowEvents" checked="checked" /></span><a class="restore-default" href="#NavigationTreeShowEvents" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr></table></fieldset><fieldset class="optbox" id="Navi_databases"><legend>Bases de données</legend><p>Options d'affichage des bases de données.</p><table width="100%" cellspacing="0"><tr><th><label for="NavigationTreeDisplayDbFilterMinimum">Nombre minimum de bases de données pour activer le filtre</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeDisplayDbFilterMinimum" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span></th><td><input type="number" name="NavigationTreeDisplayDbFilterMinimum" id="NavigationTreeDisplayDbFilterMinimum" value="30" /><a class="restore-default" href="#NavigationTreeDisplayDbFilterMinimum" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeDbSeparator">Séparateur pour l'arborescence des bases de données</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeDbSeparator" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Chaîne qui sépare les noms de bases de données en niveaux.</small></th><td><input type="text" size="25" name="NavigationTreeDbSeparator" id="NavigationTreeDbSeparator" value="_" /><a class="restore-default" href="#NavigationTreeDbSeparator" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr></table></fieldset><fieldset class="optbox" id="Navi_tables"><legend>Tables</legend><p>Options d'affichage des tables.</p><table width="100%" cellspacing="0"><tr><th><label for="NavigationTreeDefaultTabTable">Cible de l'icône d'accès rapide</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeDefaultTabTable" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span></th><td><select name="NavigationTreeDefaultTabTable" id="NavigationTreeDefaultTabTable"><option value="structure" selected="selected">Structure</option><option value="sql">SQL</option><option value="search">Rechercher</option><option value="insert">Insérer</option><option value="browse">Afficher</option></select><a class="restore-default" href="#NavigationTreeDefaultTabTable" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeDefaultTabTable2">Cible de la deuxième icône d'accès rapide</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeDefaultTabTable2" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span></th><td><select name="NavigationTreeDefaultTabTable2" id="NavigationTreeDefaultTabTable2"><option value="" selected="selected"></option><option value="structure">Structure</option><option value="sql">SQL</option><option value="search">Rechercher</option><option value="insert">Insérer</option><option value="browse">Afficher</option></select><a class="restore-default" href="#NavigationTreeDefaultTabTable2" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeTableSeparator">Séparateur pour l'arborescence des noms de tables</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeTableSeparator" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span><small>Chaîne qui sépare les noms de table en niveaux.</small></th><td><input type="text" size="25" name="NavigationTreeTableSeparator" id="NavigationTreeTableSeparator" value="__" /><a class="restore-default" href="#NavigationTreeTableSeparator" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr><tr><th><label for="NavigationTreeTableLevel">Nombre de niveaux pour l'arborescence des tables</label><span class="doc"><a href="./doc/html/config.html#cfg_NavigationTreeTableLevel" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a>
-</span></th><td><input type="number" name="NavigationTreeTableLevel" id="NavigationTreeTableLevel" value="1" /><a class="restore-default" href="#NavigationTreeTableLevel" title="Ramener la valeur par défaut" style="display:none"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_reload" /></a></td></tr></table></fieldset></div>
-</form>
-<script type="text/javascript">
-if (typeof configInlineParams === "undefined" || !Array.isArray(configInlineParams)) configInlineParams = [];
-configInlineParams.push(function() {
-validateField('FirstLevelNavigationItems', 'PMA_validatePositiveNumber', true);
-validateField('NumRecentTables', 'PMA_validateNonNegativeNumber', true);
-validateField('NumFavoriteTables', 'PMA_validateNonNegativeNumber', true);
-validateField('MaxNavigationItems', 'PMA_validatePositiveNumber', true);
-validateField('NavigationTreeTableLevel', 'PMA_validatePositiveNumber', true);
-$.extend(PMA_messages, {
-	'error_nan_p': 'Nombre non positif !',
-	'error_nan_nneg': 'Ce n\'est pas un nombre non négatif !',
-	'error_incorrect_port': 'Numéro de port invalide !',
-	'error_invalid_value': 'Valeur incorrecte !',
-	'error_value_lte': 'La valeur doit être égale ou plus petite que %s !'});
-$.extend(defaultValues, {
-	'ShowDatabasesNavigationAsTree': true,
-	'NavigationLinkWithMainPanel': true,
-	'NavigationDisplayLogo': true,
-	'NavigationLogoLink': 'index.php',
-	'NavigationLogoLinkWindow': ['main'],
-	'NavigationTreePointerEnable': true,
-	'FirstLevelNavigationItems': '100',
-	'NavigationTreeDisplayItemFilterMinimum': '30',
-	'NumRecentTables': '10',
-	'NumFavoriteTables': '10',
-	'MaxNavigationItems': '50',
-	'NavigationTreeEnableGrouping': true,
-	'NavigationTreeEnableExpansion': true,
-	'NavigationTreeShowTables': true,
-	'NavigationTreeShowViews': true,
-	'NavigationTreeShowFunctions': true,
-	'NavigationTreeShowProcedures': true,
-	'NavigationTreeShowEvents': true,
-	'NavigationTreeDisplayDbFilterMinimum': '30',
-	'NavigationTreeDbSeparator': '_',
-	'NavigationTreeDefaultTabTable': ['structure'],
-	'NavigationTreeDefaultTabTable2': [''],
-	'NavigationTreeTableSeparator': '__',
-	'NavigationTreeTableLevel': '1'});
-});
-if (typeof configScriptLoaded !== "undefined" && configInlineParams) loadInlineConfig();
-</script></div></div></div></div><div class="pma_drop_handler">Déposez des fichiers ici</div><div class="pma_sql_import_status"><h2>SQL upload ( <span class="pma_import_count">0</span> ) <span class="close">x</span><span class="minimize">-</span></h2><div></div></div></div><div id="prefs_autoload" class="notice print_ignore" style="display:none">
-    <form action="prefs_manage.php" method="post" class="disableAjax">
-        <input type="hidden" name="token" value="9bff93bf0b194ecf27fbeaaadd43c73d" />        <input type="hidden" name="json" value="" />
-        <input type="hidden" name="submit_import" value="1" />
-        <input type="hidden" name="return_url" value="export.php?" />
-        Votre navigateur contient une configuration phpMyAdmin pour ce domaine. Voulez-vous l'importer dans la session courante ?        <br />
-        <a href="#yes">Oui</a>
-        / <a href="#no">Non</a>
-    </form>
-</div><noscript><div class="error"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error" /> Javascript doit être activé !</div></noscript><div id='floating_menubar'></div><div id='serverinfo'><img src="themes/dot.gif" title="" alt="" class="icon ic_s_host item" /><a href="index.php?token=9bff93bf0b194ecf27fbeaaadd43c73d" class="item">Serveur: Local Databases</a><div class="clearfloat"></div></div><div id="topmenucontainer" class="menucontainer"><ul id="topmenu"  class="resizable-menu"><li     >
+-- --------------------------------------------------------
 
-            <a href="server_databases.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Bases de données" alt="Bases de données" class="icon ic_s_db" />&nbsp;Bases de données            </a>
-        </li>
-<li     >
+--
+-- Structure de la table `client`
+--
 
-            <a href="server_sql.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="SQL" alt="SQL" class="icon ic_b_sql" />&nbsp;SQL            </a>
-        </li>
-<li     >
+CREATE TABLE `client` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `prenom` varchar(64) NOT NULL,
+  `numCarteFidelite` int(11) NOT NULL,
+  `mail` varchar(128) NOT NULL,
+  `codePostal` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-            <a href="server_status.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="État" alt="État" class="icon ic_s_status" />&nbsp;État            </a>
-        </li>
-<li     >
+--
+-- Contenu de la table `client`
+--
 
-            <a href="server_privileges.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d&amp;viewing_mode=server"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Comptes d'utilisateurs" alt="Comptes d'utilisateurs" class="icon ic_s_rights" />&nbsp;Comptes d'utilisateurs            </a>
-        </li>
-<li     >
+INSERT INTO `client` (`id`, `nom`, `prenom`, `numCarteFidelite`, `mail`, `codePostal`, `active`) VALUES
+(1, 'WILFRIED', 'Isabella', 481489699, 'North Rhine-Westphalia, Germany', 41460, 1);
 
-            <a href="server_export.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Export" alt="Export" class="icon ic_b_export" />&nbsp;Export            </a>
-        </li>
-<li     >
+-- --------------------------------------------------------
 
-            <a href="server_import.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Import" alt="Import" class="icon ic_b_import" />&nbsp;Import            </a>
-        </li>
-<li     >
+--
+-- Structure de la table `lignevente`
+--
 
-            <a href="prefs_manage.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Paramètres" alt="Paramètres" class="icon ic_b_tblops" />&nbsp;Paramètres            </a>
-        </li>
-<li     >
+CREATE TABLE `lignevente` (
+  `id` int(11) NOT NULL,
+  `vente` int(11) NOT NULL,
+  `produit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-            <a href="server_replication.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Réplication" alt="Réplication" class="icon ic_s_replication" />&nbsp;Réplication            </a>
-        </li>
-<li     >
+-- --------------------------------------------------------
 
-            <a href="server_variables.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Variables" alt="Variables" class="icon ic_s_vars" />&nbsp;Variables            </a>
-        </li>
-<li     >
+--
+-- Structure de la table `personnel`
+--
 
-            <a href="server_collations.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Jeux de caractères" alt="Jeux de caractères" class="icon ic_s_asci" />&nbsp;Jeux de caractères            </a>
-        </li>
-<li     >
+CREATE TABLE `personnel` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `prenom` varchar(64) NOT NULL,
+  `adressePerso` varchar(128) NOT NULL,
+  `adresseTravail` varchar(128) NOT NULL,
+  `poste` varchar(64) NOT NULL,
+  `superieur` int(11) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `numBadge` int(11) NOT NULL,
+  `mdp` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-            <a href="server_engines.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="themes/dot.gif" title="Moteurs" alt="Moteurs" class="icon ic_b_engine" />&nbsp;Moteurs            </a>
-        </li>
-<li     >
+--
+-- Contenu de la table `personnel`
+--
 
-            <a href="server_plugins.php?db=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d"                                 class="tab"        >
-            <img src="./themes/pmahomme/img/b_plugin.png" title="Greffons" alt="Greffons" />&nbsp;Greffons            </a>
-        </li>
-<div class="clearfloat"></div></ul>
-</div>
-<span id="page_nav_icons"><span id="lock_page_icon"></span><span id="page_settings_icon"><img src="themes/dot.gif" title="Paramètres liés à la page" alt="Paramètres liés à la page" class="icon ic_s_cog" /></span><a id="goto_pagetop" href="#"><img src="themes/dot.gif" title="Cliquez sur la barre pour faire défiler en haut de page" alt="Cliquez sur la barre pour faire défiler en haut de page" class="icon ic_s_top" /></a></span><div id="pma_console_container"><div id="pma_console"><div class="toolbar collapsed"><div class="switch_button console_switch"><img src="themes/dot.gif" title="Console de requête SQL" alt="Console de requête SQL" class="icon ic_console" /><span>Console de requêtes SQL</span></div><div class="button clear"><span>Vider</span></div><div class="button history"><span>Historique</span></div><div class="button options"><span>Options</span></div><div class="button debug hide"><span>Déboguer SQL</span></div></div><div class="content"><div class="console_message_container"><div class="message welcome"><span><span id="instructions-0">Faites Ctrl+Entrée pour exécuter la requête</span><span class="hide" id="instructions-1">Faites Entrée pour exécuter la requête</span></span></div></div><div class="query_input"><span class="console_query_input"></span></div></div><div class="mid_layer"></div><div class="card" id="debug_console"><div class="toolbar"><div class="button order order_asc"><span>croissant</span></div><div class="button order order_desc"><span>décroissant</span></div><div class="text"><span>Ordre :</span></div><div class="switch_button"><span>Déboguer SQL</span></div><div class="button order_by sort_count"><span>Nombre</span></div><div class="button order_by sort_exec"><span>Ordre d'exécution</span></div><div class="button order_by sort_time"><span>Temps nécessaire</span></div><div class="text"><span>Trier par :</span></div><div class="button group_queries"><span>Regrouper les requêtes</span></div><div class="button ungroup_queries"><span>Dissocier les groupes</span></div></div><div class="content debug"><div class="message welcome"></div><div class="debugLog"></div></div><div class="templates"><div class="debug_query action_content"><span class="action collapse">Réduire</span> <span class="action expand">Développer</span> <span class="action dbg_show_trace">Montrer l'itinéraire d'appel</span> <span class="action dbg_hide_trace">Cacher l'itinéraire d'appel</span> <span class="text count hide">Nombre : <span></span></span><span class="text time">Temps nécessaire : <span></span></span></div></div></div><div class="card" id="pma_console_options"><div class="toolbar"><div class="switch_button"><span>Options</span></div><div class="button default"><span>Mettre par défaut</span></div></div><div class="content"><label><input type="checkbox" name="always_expand">Toujours développer les messages</label><br><label><input type="checkbox" name="start_history">Afficher l'historique des requêtes au début</label><br><label><input type="checkbox" name="current_query">Montrer la requête courante</label><br><label><input type="checkbox" name="enter_executes">Exécuter les requêtes avec Entrée et insérer une nouvelle ligne avec Maj + Entrée. Ce choix peut être rendu permanent via les paramètres.</label><br><label><input type="checkbox" name="dark_theme">Passer au thème sombre</label><br></div></div><div class="templates"><div class="query_actions"><span class="action collapse">Réduire</span> <span class="action expand">Développer</span> <span class="action requery">Exécuter la requête à nouveau</span> <span class="action edit">Modifier</span> <span class="action explain">Expliquer</span> <span class="action profiling">Profilage</span> <span class="text failed">La requête a échoué</span> <span class="text targetdb">Base de données: <span></span></span> <span class="text query_time">Daté du: <span></span></span> </div></div></div></div><div id="page_content"><!DOCTYPE HTML>
-<html lang="fr" dir="ltr">
-<head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <title>phpMyAdmin</title>
-    <meta charset="utf-8" />
-    <style type="text/css">
-    <!--
-    html {
-        padding: 0;
-        margin: 0;
-    }
-    body  {
-        font-family: sans-serif;
-        font-size: small;
-        color: #000000;
-        background-color: #F5F5F5;
-        margin: 1em;
-    }
-    h1 {
-        margin: 0;
-        padding: 0.3em;
-        font-size: 1.4em;
-        font-weight: bold;
-        color: #ffffff;
-        background-color: #ff0000;
-    }
-    p {
-        margin: 0;
-        padding: 0.5em;
-        border: 0.1em solid red;
-        background-color: #ffeeee;
-    }
-    //-->
-    </style>
-</head>
-<body>
-<h1>phpMyAdmin - Erreur</h1>
-<p>export.php: Paramètre manquant :  what<a href="./doc/html/faq.html#faqmissingparameters" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a><br />export.php: Paramètre manquant :  export_type<a href="./doc/html/faq.html#faqmissingparameters" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a><br /></p>
-</body>
-</html>
-</div><div id="selflink" class="print_ignore"><a href="export.php?db=&amp;table=&amp;server=1&amp;target=&amp;token=9bff93bf0b194ecf27fbeaaadd43c73d" title="Ouvrir une nouvelle fenêtre phpMyAdmin" target="_blank"><img src="themes/dot.gif" title="Ouvrir une nouvelle fenêtre phpMyAdmin" alt="Ouvrir une nouvelle fenêtre phpMyAdmin" class="icon ic_window-new" /></a></div><div class="clearfloat" id="pma_errors"></div><script data-cfasync="false" type="text/javascript">// <![CDATA[
-var debugSQLInfo = 'null';
-AJAX.scriptHandler;
-$(function() {});
-// ]]></script></body></html>
+INSERT INTO `personnel` (`id`, `nom`, `prenom`, `adressePerso`, `adresseTravail`, `poste`, `superieur`, `active`, `numBadge`, `mdp`) VALUES
+(1, 'BEN MABROUK', 'Houssem', '12 Clos de la scandinavie', 'Rue Paul Pierre', 'Software Engineer', NULL, 1, 453656953, '09aaa3d717d2bb9cbc0d0141b84ec228'),
+(2, 'BEN SALAH', 'Firas', '4 Tijani Mhamdi, EL OMRANE', 'La goulette', 'Ingénieur', NULL, 1, 1111606048, 'ab4f63f9ac65152575886860dde480a1'),
+(3, 'KTATA', 'Hamza', 'Nabeul', 'La goulette', 'Technicien Supérieur', 2, 1, 1403623776, 'ab4f63f9ac65152575886860dde480a1'),
+(4, 'Faizan', 'Taylor', '4457 Rhapsody Street', '533 Kennedy Court', 'Caissier', NULL, 1, 639937544, 'ab4f63f9ac65152575886860dde480a1');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `produit`
+--
+
+CREATE TABLE `produit` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `type` enum('ALIMENT','MEDECINE','APPAREIL_ELECTRONIQUE','AUTRE') NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `prix` float NOT NULL,
+  `pays` varchar(18) NOT NULL,
+  `tva` float NOT NULL,
+  `qteStock` int(11) NOT NULL,
+  `nomFournisseur` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `produit`
+--
+
+INSERT INTO `produit` (`id`, `nom`, `description`, `type`, `active`, `prix`, `pays`, `tva`, `qteStock`, `nomFournisseur`) VALUES
+(1, 'MegaPC2000', 'Ordinateur', 'APPAREIL_ELECTRONIQUE', 1, 2000, 'Tunisie', 3, 10, 'Mega PC'),
+(2, 'Lampe', 'Lampe à Acro en marbre', 'AUTRE', 1, 184.9, 'France', 5, 50, 'MyFaktory FR'),
+(3, 'Banane', 'Banane', 'ALIMENT', 1, 1.99, 'Inde', 2.5, 1000, 'Agidra');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `vente`
+--
+
+CREATE TABLE `vente` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(64) NOT NULL,
+  `caissier` int(11) NOT NULL,
+  `client` int(11) DEFAULT NULL,
+  `id_produits` int(11) NOT NULL,
+  `sous_total` float NOT NULL,
+  `tva` float NOT NULL,
+  `total` float NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `lignevente`
+--
+ALTER TABLE `lignevente`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vente` (`vente`),
+  ADD KEY `produit` (`produit`);
+
+--
+-- Index pour la table `personnel`
+--
+ALTER TABLE `personnel`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `numBadge` (`numBadge`),
+  ADD KEY `superieur` (`superieur`);
+
+--
+-- Index pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `vente`
+--
+ALTER TABLE `vente`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `caissier` (`caissier`),
+  ADD KEY `client` (`client`),
+  ADD KEY `produits` (`id_produits`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `lignevente`
+--
+ALTER TABLE `lignevente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `personnel`
+--
+ALTER TABLE `personnel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `produit`
+--
+ALTER TABLE `produit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `vente`
+--
+ALTER TABLE `vente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `lignevente`
+--
+ALTER TABLE `lignevente`
+  ADD CONSTRAINT `lignevente_ibfk_1` FOREIGN KEY (`vente`) REFERENCES `vente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `lignevente_ibfk_2` FOREIGN KEY (`produit`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `personnel`
+--
+ALTER TABLE `personnel`
+  ADD CONSTRAINT `personnel_ibfk_1` FOREIGN KEY (`superieur`) REFERENCES `personnel` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
