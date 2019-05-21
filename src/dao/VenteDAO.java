@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import model.Produit;
@@ -35,7 +37,7 @@ public class VenteDAO implements DAO<Vente> {
         List<Produit> produits = new ArrayList<>();
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM lignevente WHERE produit=?");
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM lignevente WHERE vente=?");
             pstmt.setInt(1, idVente);
             ResultSet rs = pstmt.executeQuery();
             ProduitDAO pdao = new ProduitDAO();
@@ -75,10 +77,9 @@ public class VenteDAO implements DAO<Vente> {
                         id,
                         rs.getString("nom"),
                         cdao.get(rs.getInt("client")),
-                        pdao.get(rs.getInt("caissier")),
+                        pdao.getById(rs.getInt("caissier")),
                         getProduits(id),
                         rs.getFloat("sous_total"),
-                        rs.getFloat("tva"),
                         rs.getFloat("total")
                 );
             }
@@ -104,10 +105,9 @@ public class VenteDAO implements DAO<Vente> {
                         rs.getInt("id"),
                         rs.getString("nom"),
                         cdao.get(rs.getInt("client")),
-                        pdao.get(rs.getInt("caissier")),
+                        pdao.getById(rs.getInt("caissier")),
                         getProduits(rs.getInt("id")),
                         rs.getFloat("sous_total"),
-                        rs.getFloat("tva"),
                         rs.getFloat("total")
                 ));
             }
@@ -123,21 +123,28 @@ public class VenteDAO implements DAO<Vente> {
     public void add(Vente t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Vente VALUES(NULL, ?, ?, ?, ?, ?, ?, true)");
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Vente VALUES(NULL, ?, ?, ?, ?, ?, true)", Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, t.getNom());
             pstmt.setInt(2, t.getCaissier().getId());
-            pstmt.setInt(3, t.getClient().getId());
+            if (t.getClient() == null) {
+                pstmt.setNull(3, Types.INTEGER);
+            } else {
+                pstmt.setInt(3, t.getClient().getId());
+            }
             pstmt.setFloat(4, t.getSousTotal());
-            pstmt.setFloat(5, t.getTva());
-            pstmt.setFloat(6, t.getTotal());
-            pstmt.execute();
+            pstmt.setFloat(5, t.getTotal());
+            pstmt.executeUpdate();
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                t.setId(rs.getInt(1));
+            }
             pstmt.close();
-
             t.getProduitsVendus().forEach((p) -> {
                 addLigneVente(t.getId(), p.getId());
             });
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }
@@ -146,14 +153,13 @@ public class VenteDAO implements DAO<Vente> {
     public void update(Vente t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("UPDATE Vente SET nom=?, caissier=?, client=?, sous_total=?, tva=?, total=? WHERE id=?");
+            PreparedStatement pstmt = con.prepareStatement("UPDATE Vente SET nom=?, caissier=?, client=?, sous_total=?, total=? WHERE id=?");
             pstmt.setString(1, t.getNom());
             pstmt.setInt(2, t.getCaissier().getId());
             pstmt.setInt(3, t.getClient().getId());
             pstmt.setFloat(4, t.getSousTotal());
-            pstmt.setFloat(5, t.getTva());
-            pstmt.setFloat(6, t.getTotal());
-            pstmt.setInt(7, t.getId());
+            pstmt.setFloat(5, t.getTotal());
+            pstmt.setInt(6, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {

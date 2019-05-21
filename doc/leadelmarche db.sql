@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 20 Mai 2019 à 23:06
+-- Généré le :  Mar 21 Mai 2019 à 22:44
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -56,6 +56,16 @@ CREATE TABLE `lignevente` (
   `vente` int(11) NOT NULL,
   `produit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `lignevente`
+--
+
+INSERT INTO `lignevente` (`id`, `vente`, `produit`) VALUES
+(4, 5, 1),
+(5, 6, 2),
+(6, 6, 3),
+(7, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -123,14 +133,21 @@ INSERT INTO `produit` (`id`, `nom`, `description`, `type`, `active`, `prix`, `pa
 CREATE TABLE `vente` (
   `id` int(11) NOT NULL,
   `nom` varchar(64) NOT NULL,
-  `caissier` int(11) NOT NULL,
+  `caissier` int(11) DEFAULT NULL,
   `client` int(11) DEFAULT NULL,
-  `id_produits` int(11) NOT NULL,
   `sous_total` float NOT NULL,
-  `tva` float NOT NULL,
   `total` float NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `vente`
+--
+
+INSERT INTO `vente` (`id`, `nom`, `caissier`, `client`, `sous_total`, `total`, `active`) VALUES
+(5, 'PT. 01', 4, NULL, 2000, 2060, 1),
+(6, 'PT. 01', 4, NULL, 186.89, 196.185, 1),
+(7, 'PT. 01', 4, 1, 184.9, 194.145, 1);
 
 --
 -- Index pour les tables exportées
@@ -170,8 +187,7 @@ ALTER TABLE `produit`
 ALTER TABLE `vente`
   ADD PRIMARY KEY (`id`),
   ADD KEY `caissier` (`caissier`),
-  ADD KEY `client` (`client`),
-  ADD KEY `produits` (`id_produits`);
+  ADD KEY `client` (`client`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -186,7 +202,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `lignevente`
 --
 ALTER TABLE `lignevente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `personnel`
 --
@@ -201,7 +217,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `vente`
 --
 ALTER TABLE `vente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --
@@ -218,6 +234,13 @@ ALTER TABLE `lignevente`
 --
 ALTER TABLE `personnel`
   ADD CONSTRAINT `personnel_ibfk_1` FOREIGN KEY (`superieur`) REFERENCES `personnel` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `vente`
+--
+ALTER TABLE `vente`
+  ADD CONSTRAINT `vente_ibfk_1` FOREIGN KEY (`caissier`) REFERENCES `personnel` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `vente_ibfk_2` FOREIGN KEY (`client`) REFERENCES `client` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -70,9 +70,11 @@ public class FXMLDocumentController implements Initializable {
                 mainContainer.getChildren().clear();
                 URL x = FXMLDocumentController.class.getResource("/view/PointsVenteFXML.fxml");
                 FXMLLoader loader = new FXMLLoader(x);
+                loader.setController(new PointsVenteFXMLController(this));
                 Node pane = loader.load();
                 mainContainer.getChildren().add(pane);
             } catch (Exception ex) {
+                ex.printStackTrace();
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }

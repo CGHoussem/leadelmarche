@@ -58,9 +58,10 @@ public class ConnexionFXMLController implements Initializable {
             try {
                 int numBadge = Integer.valueOf(idTF.getText());
                 String mdp = mdpTF.getText();
-                Personnel p = new PersonnelDAO().get(numBadge);
-
-                if (MD5.getMd5(mdp).equals(p.getMdp())) {
+                Personnel p = new PersonnelDAO().getByNumBadge(numBadge);
+                if (p != null
+                        && p.getPoste().toLowerCase().equals("caissier")
+                        && MD5.getMd5(mdp).equals(p.getMdp())) {
                     controller.isConnected = true;
                     controller.caissier = p;
                     controller.filterField.setVisible(true);
@@ -68,7 +69,6 @@ public class ConnexionFXMLController implements Initializable {
                 } else {
                     JOptionPane.showMessageDialog(null, "Mot de passe incorrecte", "Erreur d'identification", JOptionPane.ERROR_MESSAGE);
                 }
-
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(null, "Vérifier vos données", "Erreur d'identification", JOptionPane.ERROR_MESSAGE);

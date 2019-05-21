@@ -33,7 +33,11 @@ import model.Personnel;
 public class PersonnelDAO implements DAO<Personnel> {
 
     @Override
-    public Personnel get(int numBadge) {
+    public Personnel get(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Personnel getByNumBadge(int numBadge) {
         Personnel p = null;
         try {
             Connection con = Connexion.getInstance();
@@ -48,7 +52,35 @@ public class PersonnelDAO implements DAO<Personnel> {
                         rs.getString("adressePerso"),
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
-                        this.get(rs.getInt("superieur")),
+                        getById(rs.getInt("superieur")),
+                        rs.getInt("numBadge"),
+                        rs.getString("mdp")
+                );
+            }
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return p;
+    }
+
+    public Personnel getById(int id) {
+        Personnel p = null;
+        try {
+            Connection con = Connexion.getInstance();
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM personnel WHERE id = ?");
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                p = new Personnel(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("adressePerso"),
+                        rs.getString("adresseTravail"),
+                        rs.getString("poste"),
+                        getById(rs.getInt("superieur")),
                         rs.getInt("numBadge"),
                         rs.getString("mdp")
                 );
@@ -76,7 +108,7 @@ public class PersonnelDAO implements DAO<Personnel> {
                         rs.getString("adressePerso"),
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
-                        this.get(rs.getInt("superieur")),
+                        getById(rs.getInt("superieur")),
                         rs.getInt("numBadge"),
                         rs.getString("mdp")
                 ));
@@ -103,7 +135,7 @@ public class PersonnelDAO implements DAO<Personnel> {
                         rs.getString("adressePerso"),
                         rs.getString("adresseTravail"),
                         rs.getString("poste"),
-                        this.get(rs.getInt("superieur")),
+                        getById(rs.getInt("superieur")),
                         rs.getInt("numBadge"),
                         rs.getString("mdp")
                 ));

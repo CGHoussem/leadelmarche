@@ -87,8 +87,12 @@ public class Produit {
         this.type = type;
     }
 
-    public float getPrix() {
+    public float getPrixHorsTax() {
         return prix;
+    }
+
+    public float getPrix() {
+        return prix + prix * tva / 100;
     }
 
     public void setPrix(float prix) {
@@ -128,8 +132,8 @@ public class Produit {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return nom;
     }
-    
+
 }

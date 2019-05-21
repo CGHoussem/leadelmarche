@@ -30,27 +30,24 @@ public class Vente {
     private Personnel caissier;
     private List<Produit> produitsVendus;
     private float sousTotal;
-    private float tva;
     private float total;
 
-    public Vente(int id, String nom, Client client, Personnel caissier, List<Produit> produitsVendus, float sousTotal, float tva, float total) {
+    public Vente(int id, String nom, Client client, Personnel caissier, List<Produit> produitsVendus, float sousTotal, float total) {
         this.id = id;
         this.nom = nom;
         this.client = client;
         this.caissier = caissier;
         this.produitsVendus = produitsVendus;
         this.sousTotal = sousTotal;
-        this.tva = tva;
         this.total = total;
     }
 
-    public Vente(String nom, Client client, Personnel caissier, List<Produit> produitsVendus, float sousTotal, float tva, float total) {
+    public Vente(String nom, Client client, Personnel caissier, List<Produit> produitsVendus, float sousTotal, float total) {
         this.nom = nom;
         this.client = client;
         this.caissier = caissier;
         this.produitsVendus = produitsVendus;
         this.sousTotal = sousTotal;
-        this.tva = tva;
         this.total = total;
     }
 
@@ -102,20 +99,17 @@ public class Vente {
         this.sousTotal = sousTotal;
     }
 
-    public float getTva() {
-        return tva;
-    }
-
-    public void setTva(float tva) {
-        this.tva = tva;
-    }
-
     public float getTotal() {
         return total;
     }
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Vente{" + "id=" + id + ", nom=" + nom + ", client=" + client + ", caissier=" + caissier + ", produitsVendus=" + produitsVendus + ", sousTotal=" + sousTotal + ", total=" + total + '}';
     }
 
 }

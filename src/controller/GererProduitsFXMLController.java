@@ -18,7 +18,6 @@ package controller;
 
 import dao.ProduitDAO;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,7 +80,7 @@ public class GererProduitsFXMLController implements Initializable {
     private void initializeTable() {
         NomProduit.setCellValueFactory(new PropertyValueFactory<>("nom"));
         TVAProduit.setCellValueFactory(new PropertyValueFactory<>("tva"));
-        PrixProduit.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        PrixProduit.setCellValueFactory(new PropertyValueFactory<>("prixHorsTax"));
         QteStockProduit.setCellValueFactory(new PropertyValueFactory<>("qteStock"));
         Actions.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 
@@ -124,7 +123,7 @@ public class GererProduitsFXMLController implements Initializable {
     private void updatePrix(ActionEvent e) {
         Produit p = (Produit) (produitsCB.getSelectionModel().getSelectedItem());
         if (p != null) {
-            prixLabel.setText(p.getPrix() + " €");
+            prixLabel.setText(p.getPrixHorsTax() + " €");
         }
     }
 
@@ -133,7 +132,7 @@ public class GererProduitsFXMLController implements Initializable {
         Produit p = (Produit) (produitsCB.getSelectionModel().getSelectedItem());
         if (p != null) {
             ptsVenteController.produitsAAchetes.add(p);
-            prixLabel.setText(p.getPrix() + " €");
+            prixLabel.setText(p.getPrixHorsTax() + " €");
             refreshTableView();
         }
     }
