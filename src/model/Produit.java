@@ -123,6 +123,14 @@ public class Produit {
         this.qteStock = qteStock;
     }
 
+    public boolean subtractFromStock() {
+        if (qteStock > 0) {
+            qteStock--;
+            return true;
+        }
+        return false;
+    }
+
     public String getNomFournisseur() {
         return nomFournisseur;
     }

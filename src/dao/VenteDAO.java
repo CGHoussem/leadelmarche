@@ -62,6 +62,11 @@ public class VenteDAO implements DAO<Vente> {
         }
     }
 
+    private void removeFromStock(Produit p) {
+        if (p.subtractFromStock())
+            new ProduitDAO().update(p);
+    }
+
     @Override
     public Vente get(int id) {
         Vente v = null;
@@ -141,6 +146,7 @@ public class VenteDAO implements DAO<Vente> {
             pstmt.close();
             t.getProduitsVendus().forEach((p) -> {
                 addLigneVente(t.getId(), p.getId());
+                removeFromStock(p);
             });
 
         } catch (SQLException e) {
