@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 21 Mai 2019 à 22:44
+-- Généré le :  Jeu 23 Mai 2019 à 22:49
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -65,7 +65,10 @@ INSERT INTO `lignevente` (`id`, `vente`, `produit`) VALUES
 (4, 5, 1),
 (5, 6, 2),
 (6, 6, 3),
-(7, 7, 2);
+(7, 7, 2),
+(8, 8, 3),
+(9, 8, 3),
+(10, 8, 3);
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,7 @@ CREATE TABLE `produit` (
 INSERT INTO `produit` (`id`, `nom`, `description`, `type`, `active`, `prix`, `pays`, `tva`, `qteStock`, `nomFournisseur`) VALUES
 (1, 'MegaPC2000', 'Ordinateur', 'APPAREIL_ELECTRONIQUE', 1, 2000, 'Tunisie', 3, 10, 'Mega PC'),
 (2, 'Lampe', 'Lampe à Acro en marbre', 'AUTRE', 1, 184.9, 'France', 5, 50, 'MyFaktory FR'),
-(3, 'Banane', 'Banane', 'ALIMENT', 1, 1.99, 'Inde', 2.5, 1000, 'Agidra');
+(3, 'Banane', 'Banane', 'ALIMENT', 1, 2.03975, 'Inde', 2.5, 997, 'Agidra');
 
 -- --------------------------------------------------------
 
@@ -147,7 +150,8 @@ CREATE TABLE `vente` (
 INSERT INTO `vente` (`id`, `nom`, `caissier`, `client`, `sous_total`, `total`, `active`) VALUES
 (5, 'PT. 01', 4, NULL, 2000, 2060, 1),
 (6, 'PT. 01', 4, NULL, 186.89, 196.185, 1),
-(7, 'PT. 01', 4, 1, 184.9, 194.145, 1);
+(7, 'PT. 01', 4, 1, 184.9, 194.145, 1),
+(8, 'PT. 01', 4, NULL, 5.97, 6.11925, 1);
 
 --
 -- Index pour les tables exportées
@@ -202,7 +206,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `lignevente`
 --
 ALTER TABLE `lignevente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `personnel`
 --
@@ -217,7 +221,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `vente`
 --
 ALTER TABLE `vente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Contraintes pour les tables exportées
 --
