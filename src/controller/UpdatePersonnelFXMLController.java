@@ -98,30 +98,27 @@ public class UpdatePersonnelFXMLController implements Initializable {
             Personnel sup = null;
             if (supCB.getSelectionModel().getSelectedIndex() != -1) {
                 sup = (Personnel) supCB.getSelectionModel().getSelectedItem();
-            } else if (perso.getSuperieur() != null) {
-                JOptionPane.showMessageDialog(null, "Sélectionner un supérieur", "Erreur", JOptionPane.ERROR_MESSAGE);
-            } else {
-                Personnel p = new Personnel(
-                        nomTF.getText(),
-                        prenomTF.getText(),
-                        adrPersoTF.getText(),
-                        lieuTravailTF.getText(),
-                        posteTF.getText(),
-                        sup,
-                        numBadge,
-                        perso.getMdp()
-                );
-                p.setId(perso.getId());
-                new PersonnelDAO().update(p);
-
-                parent.fillStaffTable();
-                
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
             }
+            Personnel p = new Personnel(
+                    nomTF.getText(),
+                    prenomTF.getText(),
+                    adrPersoTF.getText(),
+                    lieuTravailTF.getText(),
+                    posteTF.getText(),
+                    sup,
+                    numBadge,
+                    perso.getMdp()
+            );
+            p.setId(perso.getId());
+            new PersonnelDAO().update(p);
+
+            parent.fillStaffTable();
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
         } else {
-            JOptionPane.showMessageDialog(null, "Vérifier vos données!", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Vérifier vos données!", "Erreur", JOptionPane.WARNING_MESSAGE);
         }
     }
 }

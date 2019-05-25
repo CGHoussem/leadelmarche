@@ -31,8 +31,12 @@
                               <TableColumn fx:id="TypeProduitTable" editable="false" prefWidth="133.0" sortable="false" text="Type" />
                               <TableColumn fx:id="PrixProduit" editable="false" prefWidth="83.0" text="Prix" />
                               <TableColumn fx:id="PaysProduit" editable="false" prefWidth="116.0" sortable="false" text="Pays" />
-                              <TableColumn fx:id="QteStockProduit" editable="false" prefWidth="61.0" resizable="false" text="Qte Stock" />
+                              <TableColumn fx:id="QteStockProduit" editable="false" minWidth="0.0" resizable="false" text="Qte Stock" />
+                              <TableColumn fx:id="ActionCol" editable="false" prefWidth="120.0" resizable="false" sortable="false" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </AnchorPane>

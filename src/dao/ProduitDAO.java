@@ -121,7 +121,7 @@ public class ProduitDAO implements DAO<Produit> {
             pstmt.setString(1, t.getNom());
             pstmt.setString(2, t.getDescription());
             pstmt.setString(3, t.getType().name());
-            pstmt.setFloat(4, t.getPrix());
+            pstmt.setFloat(4, t.getPrixHorsTax());
             pstmt.setString(5, t.getPays());
             pstmt.setFloat(6, t.getTva());
             pstmt.setInt(7, t.getQteStock());
@@ -143,7 +143,7 @@ public class ProduitDAO implements DAO<Produit> {
             pstmt.setString(1, t.getNom());
             pstmt.setString(2, t.getDescription());
             pstmt.setString(3, t.getType().name());
-            pstmt.setFloat(4, t.getPrix());
+            pstmt.setFloat(4, t.getPrixHorsTax());
             pstmt.setString(5, t.getPays());
             pstmt.setFloat(6, t.getTva());
             pstmt.setInt(7, t.getQteStock());
@@ -151,6 +151,8 @@ public class ProduitDAO implements DAO<Produit> {
             pstmt.setInt(9, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
+
+            JOptionPane.showMessageDialog(null, "Le produit " + t.getNom() + " a été mis à jour avec succés", "M.A.J du produit", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

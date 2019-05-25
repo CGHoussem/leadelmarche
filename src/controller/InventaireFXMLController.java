@@ -16,7 +16,9 @@
  */
 package controller;
 
+import Utility.ResourceLoader;
 import dao.ProduitDAO;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +28,25 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import javax.swing.JOptionPane;
+import model.Personnel;
 import model.Produit;
 import model.TypeProduit;
 
@@ -76,11 +90,15 @@ public class InventaireFXMLController implements Initializable {
     private TableColumn<Produit, String> PaysProduit;
     @FXML
     private TableColumn<Produit, Integer> QteStockProduit;
+    @FXML
+    private TableColumn ActionCol;
 
-    private FXMLDocumentController controller;
+    private FXMLDocumentController parent;
+    private InventaireFXMLController controller;
 
-    public InventaireFXMLController(FXMLDocumentController controller) {
-        this.controller = controller;
+    public InventaireFXMLController(FXMLDocumentController parent) {
+        controller = this;
+        this.parent = parent;
     }
 
     @Override
@@ -98,14 +116,61 @@ public class InventaireFXMLController implements Initializable {
         PrixProduit.setCellValueFactory(new PropertyValueFactory<Produit, Float>("prix"));
         PaysProduit.setCellValueFactory(new PropertyValueFactory<Produit, String>("pays"));
         QteStockProduit.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("qteStock"));
+
+        Callback<TableColumn<Personnel, String>, TableCell<Personnel, String>> cellFactory;
+        cellFactory = (TableColumn<Personnel, String> param) -> {
+            final TableCell<Personnel, String> cell = new TableCell<Personnel, String>() {
+                final Button updateBtn = new Button("", new ImageView(ResourceLoader.getImage("edit.png")));
+                final Button deleteBtn = new Button("", new ImageView(ResourceLoader.getImage("delete.png")));
+
+                HBox hbox = new HBox(updateBtn, deleteBtn);
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        updateBtn.setOnAction(event -> {
+                            try {
+                                Produit produit = tableProduits.getItems().get(getIndex());
+                                Stage stage = new Stage();
+                                URL x = getClass().getResource("/view/UpdateProduitFXML.fxml");
+                                FXMLLoader loader = new FXMLLoader(x);
+                                loader.setController(new UpdateProduitFXMLController(controller, produit));
+                                Parent pane = loader.load();
+                                stage.setScene(new Scene(pane));
+                                stage.setTitle("Mis à jour d'un produit");
+                                stage.initModality(Modality.WINDOW_MODAL);
+                                stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+                                stage.show();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                System.exit(1);
+                            }
+                        });
+                        deleteBtn.setOnAction(event -> {
+                            Produit produit = tableProduits.getItems().get(getIndex());
+                            new ProduitDAO().delete(produit);
+                            fillProductTable();
+                        });
+                        setGraphic(hbox);
+                        setText(null);
+                    }
+                }
+            };
+            return cell;
+        };
+        ActionCol.setCellFactory(cellFactory);
     }
 
-    private void fillProductTable() {
+    public void fillProductTable() {
         ObservableList<Produit> masterData = FXCollections.observableArrayList();
         masterData.setAll(new ProduitDAO().getAll());
         FilteredList<Produit> filteredData = new FilteredList<>(masterData, p -> true);
 
-        controller.filterField.textProperty().addListener((obs, oldValue, newValue) -> {
+        parent.filterField.textProperty().addListener((obs, oldValue, newValue) -> {
             filteredData.setPredicate(produit -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
