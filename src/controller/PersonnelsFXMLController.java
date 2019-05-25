@@ -17,8 +17,11 @@
 package controller;
 
 import Utility.RandomString;
+import Utility.ResourceLoader;
 import dao.PersonnelDAO;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -26,12 +29,23 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import model.Personnel;
 
@@ -76,11 +90,16 @@ public class PersonnelsFXMLController implements Initializable {
     private TableColumn<Personnel, String> PostePersoCol;
     @FXML
     private TableColumn<Personnel, Personnel> SupPersoCol;
+    @FXML
+    private TableColumn ActionCol;
 
-    private FXMLDocumentController controller;
+    private PersonnelsFXMLController controller;
+    private FXMLDocumentController parent;
+    List<Personnel> staffList;
 
-    public PersonnelsFXMLController(FXMLDocumentController controller) {
-        this.controller = controller;
+    public PersonnelsFXMLController(FXMLDocumentController parent) {
+        this.parent = parent;
+        controller = this;
     }
 
     @Override
@@ -103,14 +122,62 @@ public class PersonnelsFXMLController implements Initializable {
         AdrTravailCol.setCellValueFactory(new PropertyValueFactory<>("adresseTravail"));
         PostePersoCol.setCellValueFactory(new PropertyValueFactory<>("poste"));
         SupPersoCol.setCellValueFactory(new PropertyValueFactory<>("superieur"));
+
+        Callback<TableColumn<Personnel, String>, TableCell<Personnel, String>> cellFactory;
+        cellFactory = (TableColumn<Personnel, String> param) -> {
+            final TableCell<Personnel, String> cell = new TableCell<Personnel, String>() {
+                final Button updateBtn = new Button("", new ImageView(ResourceLoader.getImage("edit.png")));
+                final Button deleteBtn = new Button("", new ImageView(ResourceLoader.getImage("delete.png")));
+
+                HBox hbox = new HBox(updateBtn, deleteBtn);
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        updateBtn.setOnAction(event -> {
+                            try {
+                                Personnel perso = tablePersonnels.getItems().get(getIndex());
+                                Stage stage = new Stage();
+                                URL x = getClass().getResource("/view/UpdatePersonnelFXML.fxml");
+                                FXMLLoader loader = new FXMLLoader(x);
+                                loader.setController(new UpdatePersonnelFXMLController(controller, perso));
+                                Parent pane = loader.load();
+                                stage.setScene(new Scene(pane));
+                                stage.setTitle("Mis à jour d'un personnel");
+                                stage.initModality(Modality.WINDOW_MODAL);
+                                stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+                                stage.show();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                System.exit(1);
+                            }
+                        });
+                        deleteBtn.setOnAction(event -> {
+                            Personnel perso = tablePersonnels.getItems().get(getIndex());
+                            new PersonnelDAO().delete(perso);
+                            fillStaffTable();
+                        });
+                        setGraphic(hbox);
+                        setText(null);
+                    }
+                }
+            };
+            return cell;
+        };
+        ActionCol.setCellFactory(cellFactory);
     }
 
-    private void fillStaffTable() {
+    void fillStaffTable() {
         ObservableList<Personnel> masterData = FXCollections.observableArrayList();
-        masterData.setAll(new PersonnelDAO().getAll());
+        staffList = new PersonnelDAO().getAll();
+        masterData.setAll(staffList);
         FilteredList<Personnel> filteredData = new FilteredList<>(masterData, p -> true);
 
-        controller.filterField.textProperty().addListener((obs, oldValue, newValue) -> {
+        parent.filterField.textProperty().addListener((obs, oldValue, newValue) -> {
             filteredData.setPredicate(personnel -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;

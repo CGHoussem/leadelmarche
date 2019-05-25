@@ -184,11 +184,17 @@ public class PersonnelDAO implements DAO<Personnel> {
             pstmt.setString(3, t.getAdressePerso());
             pstmt.setString(4, t.getAdresseTravail());
             pstmt.setString(5, t.getPoste());
-            pstmt.setInt(6, t.getSuperieur().getId());
+            if (t.getSuperieur() == null) {
+                pstmt.setNull(6, Types.INTEGER);
+            } else {
+                pstmt.setInt(6, t.getSuperieur().getId());
+            }
             pstmt.setInt(7, t.getNumBadge());
             pstmt.setInt(8, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
+
+            JOptionPane.showMessageDialog(null, "Le personnel " + t.getNom() + " a été mis à jour avec succés", "M.A.J du personnel", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
