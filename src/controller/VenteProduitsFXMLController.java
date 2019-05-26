@@ -63,9 +63,9 @@ public class VenteProduitsFXMLController implements Initializable {
 
     private void initializeTable() {
         NomTC.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        DescriptionTC.setCellValueFactory(new PropertyValueFactory<>("tva"));
-        PrixUnitaireTC.setCellValueFactory(new PropertyValueFactory<>("prixHorsTax"));
-        PrixVenteTC.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        DescriptionTC.setCellValueFactory(new PropertyValueFactory<>("description"));
+        PrixUnitaireTC.setCellValueFactory(new PropertyValueFactory<>("stringPrixHorsTax"));
+        PrixVenteTC.setCellValueFactory(new PropertyValueFactory<>("stringPrix"));
     }
 
     private void fillTable() {

@@ -16,7 +16,9 @@
  */
 package controller;
 
+import Utility.ResourceLoader;
 import dao.ClientDAO;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -25,13 +27,25 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import model.Client;
+import model.Personnel;
 
 /**
  * FXML Controller class
@@ -64,11 +78,15 @@ public class ClientsFXMLController implements Initializable {
     private TableColumn<Client, String> MailClientCol;
     @FXML
     private TableColumn<Client, Integer> CodePostaleClientCol;
+    @FXML
+    private TableColumn ActionsCol;
 
-    private FXMLDocumentController controller;
+    private FXMLDocumentController parent;
+    private ClientsFXMLController controller;
 
-    public ClientsFXMLController(FXMLDocumentController controller) {
-        this.controller = controller;
+    public ClientsFXMLController(FXMLDocumentController parent) {
+        this.parent = parent;
+        controller = this;
     }
 
     @Override
@@ -84,14 +102,61 @@ public class ClientsFXMLController implements Initializable {
         NumCarteClientCol.setCellValueFactory(new PropertyValueFactory<Client, Integer>("numCarteFidelite"));
         MailClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("mail"));
         CodePostaleClientCol.setCellValueFactory(new PropertyValueFactory<Client, Integer>("codePostal"));
+
+        Callback<TableColumn<Personnel, String>, TableCell<Personnel, String>> cellFactory;
+        cellFactory = (TableColumn<Personnel, String> param) -> {
+            final TableCell<Personnel, String> cell = new TableCell<Personnel, String>() {
+                final Button updateBtn = new Button("", new ImageView(ResourceLoader.getImage("edit.png")));
+                final Button deleteBtn = new Button("", new ImageView(ResourceLoader.getImage("delete.png")));
+
+                HBox hbox = new HBox(updateBtn, deleteBtn);
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        updateBtn.setOnAction(event -> {
+                            try {
+                                Client client = tableClients.getItems().get(getIndex());
+                                Stage stage = new Stage();
+                                URL x = getClass().getResource("/view/UpdateClientFXML.fxml");
+                                FXMLLoader loader = new FXMLLoader(x);
+                                loader.setController(new UpdateClientFXMLController(controller, client));
+                                Parent pane = loader.load();
+                                stage.setScene(new Scene(pane));
+                                stage.setTitle("Mis à jour d'un client");
+                                stage.initModality(Modality.WINDOW_MODAL);
+                                stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+                                stage.show();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                System.exit(1);
+                            }
+                        });
+                        deleteBtn.setOnAction(event -> {
+                            Client client = tableClients.getItems().get(getIndex());
+                            new ClientDAO().delete(client);
+                            fillClientTable();
+                        });
+                        setGraphic(hbox);
+                        setText(null);
+                    }
+                }
+            };
+            return cell;
+        };
+        ActionsCol.setCellFactory(cellFactory);
     }
 
-    private void fillClientTable() {
+    public void fillClientTable() {
         ObservableList<Client> masterData = FXCollections.observableArrayList();
         masterData.setAll(new ClientDAO().getAll());
         FilteredList<Client> filteredData = new FilteredList<>(masterData, c -> true);
 
-        controller.filterField.textProperty().addListener((obs, oldValue, newValue) -> {
+        parent.filterField.textProperty().addListener((obs, oldValue, newValue) -> {
             filteredData.setPredicate(client -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;

@@ -80,7 +80,7 @@ public class GererProduitsFXMLController implements Initializable {
     private void initializeTable() {
         NomProduit.setCellValueFactory(new PropertyValueFactory<>("nom"));
         TVAProduit.setCellValueFactory(new PropertyValueFactory<>("tva"));
-        PrixProduit.setCellValueFactory(new PropertyValueFactory<>("prixHorsTax"));
+        PrixProduit.setCellValueFactory(new PropertyValueFactory<>("stringPrixHorsTax"));
         QteStockProduit.setCellValueFactory(new PropertyValueFactory<>("qteStock"));
         Actions.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 

@@ -106,6 +106,10 @@ public class Vente {
     public void setTotal(float total) {
         this.total = total;
     }
+    
+    public String getStringTotal(){
+        return total + " €";
+    }
 
     @Override
     public String toString() {

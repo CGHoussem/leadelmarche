@@ -85,7 +85,9 @@ public class InventaireFXMLController implements Initializable {
     @FXML
     private TableColumn<Produit, String> TypeProduitTable;
     @FXML
-    private TableColumn<Produit, Float> PrixProduit;
+    private TableColumn<Produit, String> PrixProduit;
+    @FXML
+    private TableColumn<Produit, Float> TvaProduit;
     @FXML
     private TableColumn<Produit, String> PaysProduit;
     @FXML
@@ -110,12 +112,13 @@ public class InventaireFXMLController implements Initializable {
     }
 
     private void initializeProductTableColumns() {
-        NomProduit.setCellValueFactory(new PropertyValueFactory<Produit, String>("nom"));
-        DescriptionProduit.setCellValueFactory(new PropertyValueFactory<Produit, String>("description"));
-        TypeProduitTable.setCellValueFactory(new PropertyValueFactory<Produit, String>("type"));
-        PrixProduit.setCellValueFactory(new PropertyValueFactory<Produit, Float>("prix"));
-        PaysProduit.setCellValueFactory(new PropertyValueFactory<Produit, String>("pays"));
-        QteStockProduit.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("qteStock"));
+        NomProduit.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        DescriptionProduit.setCellValueFactory(new PropertyValueFactory<>("description"));
+        TypeProduitTable.setCellValueFactory(new PropertyValueFactory<>("type"));
+        PrixProduit.setCellValueFactory(new PropertyValueFactory<>("stringPrixHorsTax"));
+        TvaProduit.setCellValueFactory(new PropertyValueFactory<>("tva"));
+        PaysProduit.setCellValueFactory(new PropertyValueFactory<>("pays"));
+        QteStockProduit.setCellValueFactory(new PropertyValueFactory<>("qteStock"));
 
         Callback<TableColumn<Personnel, String>, TableCell<Personnel, String>> cellFactory;
         cellFactory = (TableColumn<Personnel, String> param) -> {

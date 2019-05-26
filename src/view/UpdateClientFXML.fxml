@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Mettre à jour un client" textFill="#00000080">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="16.0" layoutY="58.0" prefHeight="192.0" prefWidth="571.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.0" minWidth="10.0" prefWidth="243.0" />
+          <ColumnConstraints fillWidth="false" hgrow="ALWAYS" maxWidth="356.0" minWidth="10.0" prefWidth="328.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="66.0" minHeight="10.0" percentHeight="50.0" prefHeight="39.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="69.0" minHeight="0.0" percentHeight="50.0" prefHeight="69.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="44.0" minHeight="10.0" percentHeight="50.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Nom du client" />
+            <Label text="Prénom du client" GridPane.rowIndex="1" />
+            <Label text="Numéro de carte de fidélité" GridPane.rowIndex="2" />
+            <Label text="Adresse mail du client" GridPane.rowIndex="3" />
+            <Label text="Code postal du client" GridPane.rowIndex="4" />
+            <TextField fx:id="nomTF" editable="false" prefWidth="200.0" promptText="Entrez le nom du client" GridPane.columnIndex="1" />
+            <TextField fx:id="prenomTF" editable="false" prefWidth="200.0" promptText="Entrez le prénom du client" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="numCarteFideliteTF" editable="false" prefWidth="200.0" promptText="Entrez le # de carte de fidélité" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="mailTF" prefWidth="200.0" promptText="Entrez @ mail du client" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="codePostalTF" prefWidth="200.0" promptText="Entrez le code postal du client" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <HBox alignment="CENTER" layoutX="16.0" layoutY="264.0" prefHeight="86.0" prefWidth="571.0" spacing="15.0">
+         <children>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#resetForm" prefHeight="35.0" prefWidth="125.0" text="Réinitialiser" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#update" prefHeight="35.0" prefWidth="125.0" text="Mettre à jour" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

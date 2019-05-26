@@ -128,8 +128,6 @@ public class ProduitDAO implements DAO<Produit> {
             pstmt.setString(8, t.getNomFournisseur());
             pstmt.execute();
             pstmt.close();
-
-            JOptionPane.showMessageDialog(null, "Le produit " + t.getNom() + " a été ajouté avec succés", "Ajout d'un produit", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -166,6 +164,8 @@ public class ProduitDAO implements DAO<Produit> {
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Le produit " + t.getNom() + " a été supprimer avec succés", "Suppression d'un produit", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

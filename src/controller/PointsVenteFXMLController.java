@@ -65,7 +65,7 @@ public class PointsVenteFXMLController implements Initializable {
     @FXML
     private TableColumn<Vente, Client> clientTC;
     @FXML
-    private TableColumn<Vente, Float> totalTC;
+    private TableColumn<Vente, String> totalTC;
     @FXML
     private TableColumn actionTC;
 
@@ -109,7 +109,7 @@ public class PointsVenteFXMLController implements Initializable {
         nomPTVenteTC.setCellValueFactory(new PropertyValueFactory<>("nom"));
         caissierTC.setCellValueFactory(new PropertyValueFactory<>("caissier"));
         clientTC.setCellValueFactory(new PropertyValueFactory<>("client"));
-        totalTC.setCellValueFactory(new PropertyValueFactory<>("total"));
+        totalTC.setCellValueFactory(new PropertyValueFactory<>("stringTotal"));
         actionTC.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 
         Callback<TableColumn<Vente, String>, TableCell<Vente, String>> cellFactory;

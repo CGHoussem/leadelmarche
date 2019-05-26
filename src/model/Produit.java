@@ -91,6 +91,14 @@ public class Produit {
         return prix;
     }
 
+    public String getStringPrixHorsTax() {
+        return getPrixHorsTax() + " €";
+    }
+
+    public String getStringPrix() {
+        return getPrix() + " €";
+    }
+
     public float getPrix() {
         return prix + prix * tva / 100;
     }
