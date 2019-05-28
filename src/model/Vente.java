@@ -119,7 +119,6 @@ public class Vente {
 
     public void enregistrerVente() throws IOException {
         LocalDateTime ldt = LocalDateTime.now();
-        Timestamp timestamp = Timestamp.valueOf(ldt);
         String filename = "factures/facture" + ldt.format(DateTimeFormatter.ofPattern("yMdHms")) + ".txt";
         FileWriter write = new FileWriter(filename, true);
         PrintWriter printLine = new PrintWriter(write);
