@@ -171,6 +171,11 @@ public class PersonnelsFXMLController implements Initializable {
         ActionCol.setCellFactory(cellFactory);
     }
 
+    private String simplifyName(String name) {
+        String temp = name.toUpperCase().replaceAll("[ÉÈËÊ]", "E");
+        return temp.replaceAll("[ÀÄÂ]", "A");
+    }
+
     void fillStaffTable() {
         ObservableList<Personnel> masterData = FXCollections.observableArrayList();
         staffList = new PersonnelDAO().getAll();
@@ -182,9 +187,9 @@ public class PersonnelsFXMLController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (personnel.getNom().toLowerCase().contains(lowerCaseFilter)
-                        || personnel.getPrenom().toLowerCase().contains(lowerCaseFilter)
+                String lowerCaseFilter = simplifyName(newValue).toLowerCase();
+                if (simplifyName(personnel.getNom()).toLowerCase().contains(lowerCaseFilter)
+                        || simplifyName(personnel.getPrenom()).toLowerCase().contains(lowerCaseFilter)
                         || String.valueOf(personnel.getNumBadge()).contains(lowerCaseFilter)) {
                     return true;
                 }
