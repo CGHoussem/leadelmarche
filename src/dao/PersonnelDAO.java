@@ -152,7 +152,7 @@ public class PersonnelDAO implements DAO<Personnel> {
     public void add(Personnel t) {
         try {
             Connection con = Connexion.getInstance();
-            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Personnel VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, MD5(?), true)");
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO Personnel VALUES(NULL, ?, ?, ?, ?, ?, ?, true, ?, MD5(?))");
             pstmt.setString(1, t.getNom());
             pstmt.setString(2, t.getPrenom());
             pstmt.setString(3, t.getAdressePerso());
@@ -163,8 +163,8 @@ public class PersonnelDAO implements DAO<Personnel> {
             } else {
                 pstmt.setInt(6, t.getSuperieur().getId());
             }
-            pstmt.setString(7, t.getMdp());
-            pstmt.setInt(8, t.getNumBadge());
+            pstmt.setInt(7, t.getNumBadge());
+            pstmt.setString(8, t.getMdp());
             pstmt.execute();
             pstmt.close();
 
