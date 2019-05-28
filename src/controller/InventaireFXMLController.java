@@ -239,6 +239,8 @@ public class InventaireFXMLController implements Initializable {
 
                 resetForm(null);
                 fillProductTable();
+                
+                JOptionPane.showMessageDialog(null, "Le produit a été ajouter avec succée", "Information", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(null, "Vérifier le prix ou la quantité!", "Erreur", JOptionPane.ERROR_MESSAGE);

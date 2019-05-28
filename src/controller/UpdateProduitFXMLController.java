@@ -154,6 +154,8 @@ public class UpdateProduitFXMLController implements Initializable {
 
             parent.fillProductTable();
 
+            JOptionPane.showMessageDialog(null, "Le produit " + p.getNom() + " a été mis à jour avec succés", "M.A.J du produit", JOptionPane.INFORMATION_MESSAGE);
+
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();

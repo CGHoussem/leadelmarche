@@ -16,6 +16,12 @@
  */
 package model;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -106,9 +112,35 @@ public class Vente {
     public void setTotal(float total) {
         this.total = total;
     }
-    
-    public String getStringTotal(){
+
+    public String getStringTotal() {
         return total + " €";
+    }
+
+    public void enregistrerVente() throws IOException {
+        LocalDateTime ldt = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(ldt);
+        String filename = "factures/facture" + ldt.format(DateTimeFormatter.ofPattern("yMdHms")) + ".txt";
+        FileWriter write = new FileWriter(filename, true);
+        PrintWriter printLine = new PrintWriter(write);
+
+        String date = ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        printLine.printf("=========================\n");
+        printLine.printf("Vente " + nom + "\n");
+        printLine.printf("Date\t:\t" + date + "\n");
+        printLine.printf("Caissier\t:\t" + caissier + "\n");
+        printLine.printf("Client\t:\t" + client + "\n");
+        printLine.printf("Produits Vendus :\n");
+        produitsVendus.forEach((p) -> {
+            printLine.printf("\t" + p + "\n");
+        });
+        printLine.printf("Sous Total :\t" + sousTotal + "\n");
+        printLine.printf("Total :\t" + total + "\n");
+        printLine.printf("=========================\n");
+
+        printLine.close();
+        write.close();
     }
 
     @Override

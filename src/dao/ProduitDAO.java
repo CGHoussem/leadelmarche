@@ -149,8 +149,6 @@ public class ProduitDAO implements DAO<Produit> {
             pstmt.setInt(9, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
-
-            JOptionPane.showMessageDialog(null, "Le produit " + t.getNom() + " a été mis à jour avec succés", "M.A.J du produit", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

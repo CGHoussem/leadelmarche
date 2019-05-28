@@ -23,6 +23,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,11 +89,11 @@ public class PointsVenteFXMLController implements Initializable {
     private float sousTotal;
     private float total;
 
-    FXMLDocumentController controller;
+    FXMLDocumentController parent;
     List<Produit> produitsAAchetes;
 
-    public PointsVenteFXMLController(FXMLDocumentController controller) {
-        this.controller = controller;
+    public PointsVenteFXMLController(FXMLDocumentController parent) {
+        this.parent = parent;
     }
 
     @Override
@@ -99,7 +101,7 @@ public class PointsVenteFXMLController implements Initializable {
         initializeTT();
         fillTable();
         produitsAAchetes = new ArrayList<>();
-        caissierTF.setText(controller.caissier.toString());
+        caissierTF.setText(parent.caissier.toString());
         nbrProduitsLabel.setText("0 produits");
         sousTotalLabel.setText("SOUS TOTAL: 0 €");
         totalLabel.setText("TOTAL: 0 €");
@@ -212,12 +214,17 @@ public class PointsVenteFXMLController implements Initializable {
         } else if (!nomPtVenteTF.getText().isEmpty()
                 && (clientCB.getSelectionModel().getSelectedIndex() != -1 || anonymousClient.isSelected())) {
             Client client = (Client) clientCB.getSelectionModel().getSelectedItem();
-            Vente v = new Vente(nomPtVenteTF.getText(), client, controller.caissier, produitsAAchetes, sousTotal, total);
+            Vente v = new Vente(nomPtVenteTF.getText(), client, parent.caissier, produitsAAchetes, sousTotal, total);
 
-            new VenteDAO().add(v);
-
-            JOptionPane.showMessageDialog(null, "La vente a été ajouter avec succée", "Information", JOptionPane.INFORMATION_MESSAGE);
-            resetVenteForm(null);
+            try {
+                new VenteDAO().add(v);
+                v.enregistrerVente();
+                JOptionPane.showMessageDialog(null, "La vente a été ajouter avec succée", "Information", JOptionPane.INFORMATION_MESSAGE);
+                fillTable();
+                resetVenteForm(null);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Erreur enregistrer la vente sous document texte!", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Vérifier vos données!", "Erreur", JOptionPane.WARNING_MESSAGE);
         }
