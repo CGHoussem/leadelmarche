@@ -23,6 +23,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -140,6 +141,8 @@ public class Vente {
 
         printLine.close();
         write.close();
+
+        JOptionPane.showConfirmDialog(null, "La facture est enregistrée dans " + filename, "Facture", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
