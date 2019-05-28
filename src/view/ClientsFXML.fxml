@@ -27,8 +27,8 @@
                            <columns>
                               <TableColumn fx:id="NomClientCol" editable="false" prefWidth="101.0" text="Nom" />
                               <TableColumn fx:id="PrenomClientCol" editable="false" minWidth="0.0" prefWidth="79.0" text="Prénom" />
-                              <TableColumn fx:id="NumCarteClientCol" editable="false" prefWidth="90.0" sortable="false" text="Num de carte de fidélite" />
-                              <TableColumn fx:id="MailClientCol" editable="false" prefWidth="150.0" sortable="false" text="Mail" />
+                              <TableColumn fx:id="NumCarteClientCol" editable="false" prefWidth="90.0" sortable="false" text="# carte de fidélite" />
+                              <TableColumn fx:id="MailClientCol" editable="false" prefWidth="150.0" sortable="false" text="Email" />
                               <TableColumn fx:id="CodePostaleClientCol" editable="false" prefWidth="150.0" sortable="false" text="Code Postal" />
                               <TableColumn fx:id="ActionsCol" editable="false" prefWidth="150.0" sortable="false" />
                            </columns>
@@ -59,15 +59,15 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField fx:id="nomClientTF" prefWidth="150.0" promptText="Nom" GridPane.columnIndex="1" />
-                                    <TextField fx:id="prenomClientTF" prefWidth="150.0" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="nomClientTF" prefWidth="150.0" promptText="Entrez le nom" GridPane.columnIndex="1" />
+                                    <TextField fx:id="prenomClientTF" prefWidth="150.0" promptText="Entrez le prénom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <TextField fx:id="numCarteFideliteTF" editable="false" prefWidth="150.0" promptText="# carte de fidélite" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="mailClientTF" prefWidth="150.0" promptText="Mail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField fx:id="codePostaleClientTF" prefWidth="150.0" promptText="Code postale" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="mailClientTF" prefWidth="150.0" promptText="Entrez l'adresse email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="codePostaleClientTF" prefWidth="150.0" promptText="Entrez le code postale" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Label text="Nom" />
                                     <Label text="Prénom" GridPane.rowIndex="1" />
                                     <Label text="Numéro carte de fidélite" GridPane.rowIndex="2" />
-                                    <Label text="Mail" GridPane.rowIndex="3" />
+                                    <Label text="Email adresse" GridPane.rowIndex="3" />
                                     <Label text="Code postale" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>

@@ -82,7 +82,7 @@ public class ClientsFXMLController implements Initializable {
     private TableColumn ActionsCol;
 
     private FXMLDocumentController parent;
-    private ClientsFXMLController controller;
+    private final ClientsFXMLController controller;
 
     public ClientsFXMLController(FXMLDocumentController parent) {
         this.parent = parent;
@@ -97,11 +97,11 @@ public class ClientsFXMLController implements Initializable {
     }
 
     private void initializeClientTableColumns() {
-        NomClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
-        PrenomClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
-        NumCarteClientCol.setCellValueFactory(new PropertyValueFactory<Client, Integer>("numCarteFidelite"));
-        MailClientCol.setCellValueFactory(new PropertyValueFactory<Client, String>("mail"));
-        CodePostaleClientCol.setCellValueFactory(new PropertyValueFactory<Client, Integer>("codePostal"));
+        NomClientCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        PrenomClientCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        NumCarteClientCol.setCellValueFactory(new PropertyValueFactory<>("numCarteFidelite"));
+        MailClientCol.setCellValueFactory(new PropertyValueFactory<>("mail"));
+        CodePostaleClientCol.setCellValueFactory(new PropertyValueFactory<>("codePostal"));
 
         Callback<TableColumn<Personnel, String>, TableCell<Personnel, String>> cellFactory;
         cellFactory = (TableColumn<Personnel, String> param) -> {
@@ -151,6 +151,11 @@ public class ClientsFXMLController implements Initializable {
         ActionsCol.setCellFactory(cellFactory);
     }
 
+    private String simplifyName(String name) {
+        String temp = name.toUpperCase().replaceAll("[ÉÈËÊ]", "E");
+        return temp.replaceAll("[ÀÄÂ]", "A");
+    }
+    
     public void fillClientTable() {
         ObservableList<Client> masterData = FXCollections.observableArrayList();
         masterData.setAll(new ClientDAO().getAll());
@@ -161,9 +166,9 @@ public class ClientsFXMLController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (client.getNom().toLowerCase().contains(lowerCaseFilter)
-                        || client.getPrenom().toLowerCase().contains(lowerCaseFilter)
+                String lowerCaseFilter = simplifyName(newValue).toLowerCase();
+                if (simplifyName(client.getNom()).toLowerCase().contains(lowerCaseFilter)
+                        || simplifyName(client.getPrenom()).toLowerCase().contains(lowerCaseFilter)
                         || String.valueOf(client.getNumCarteFidelite()).contains(lowerCaseFilter)) {
                     return true;
                 }
@@ -180,6 +185,7 @@ public class ClientsFXMLController implements Initializable {
                 && !prenomClientTF.getText().isEmpty()
                 && !numCarteFideliteTF.getText().isEmpty()
                 && !mailClientTF.getText().isEmpty()
+                && mailClientTF.getText().contains("@")
                 && !codePostaleClientTF.getText().isEmpty()) {
             int numCarteFidelite = Integer.parseInt(numCarteFideliteTF.getText());
             int codePostal = Integer.parseInt(codePostaleClientTF.getText());

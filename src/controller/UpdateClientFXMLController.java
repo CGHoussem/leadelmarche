@@ -78,6 +78,7 @@ public class UpdateClientFXMLController implements Initializable {
                 && !prenomTF.getText().isEmpty()
                 && !numCarteFideliteTF.getText().isEmpty()
                 && !mailTF.getText().isEmpty()
+                && mailTF.getText().contains("@")
                 && !codePostalTF.getText().isEmpty()) {
 
             int numCarteFid = Integer.parseInt(numCarteFideliteTF.getText());
