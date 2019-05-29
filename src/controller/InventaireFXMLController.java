@@ -144,7 +144,7 @@ public class InventaireFXMLController implements Initializable {
                                 loader.setController(new UpdateProduitFXMLController(controller, produit));
                                 Parent pane = loader.load();
                                 stage.setScene(new Scene(pane));
-                                stage.setTitle("Mis à jour d'un produit");
+                                stage.setTitle("Mise à jour d'un produit");
                                 stage.initModality(Modality.WINDOW_MODAL);
                                 stage.initOwner(((Node) event.getSource()).getScene().getWindow());
                                 stage.show();

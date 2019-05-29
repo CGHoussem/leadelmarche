@@ -147,7 +147,7 @@ public class PersonnelsFXMLController implements Initializable {
                                 loader.setController(new UpdatePersonnelFXMLController(controller, perso));
                                 Parent pane = loader.load();
                                 stage.setScene(new Scene(pane));
-                                stage.setTitle("Mis à jour d'un personnel");
+                                stage.setTitle("Mise à jour d'un personnel");
                                 stage.initModality(Modality.WINDOW_MODAL);
                                 stage.initOwner(((Node) event.getSource()).getScene().getWindow());
                                 stage.show();
